@@ -1,0 +1,43 @@
+.filter-brand {
+	position: relative;
+	&__title {
+		font-size: 18px;
+		cursor: pointer;
+
+		&:hover {
+			color: #fcea49;
+		}
+		span {
+			display: flex;
+			gap: 5px;
+			align-items: center;
+		}
+	}
+
+	&__items {
+		position: absolute;
+		top: calc(100% + 5px);
+		left: 15px;
+		z-index: 1000;
+		width: max-content;
+		flex-direction: column;
+		gap: 10px;
+		padding: 10px;
+		max-height: 200px;
+		overflow-y: scroll;
+		border-radius: 5px;
+		background-color: #1b1b1c;
+	}
+
+	&__item {
+		padding: 5px;
+		display: flex;
+		border-radius: 6px;
+		gap: 10px;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #353536;
+		}
+	}
+}

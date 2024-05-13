@@ -1,0 +1,8 @@
+.filter {
+	letter-spacing: 1px;
+	&__wrapper {
+		display: flex;
+		justify-content: space-between;
+		color: #fff;
+	}
+}

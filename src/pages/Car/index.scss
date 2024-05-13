@@ -1,0 +1,20 @@
+.car {
+	padding: 50px 20px 0px 20px;
+	letter-spacing: 1px;
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 35px;
+	}
+
+	&__name {
+		margin: 0 auto;
+		width: 100%;
+		max-width: 1190px;
+		padding: 0 20px;
+		color: #fff;
+		font-size: 30px;
+		font-weight: 500;
+		line-height: 1.25em;
+	}
+}

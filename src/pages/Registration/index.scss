@@ -1,0 +1,156 @@
+.registration {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	letter-spacing: 1px;
+
+	&__container {
+		display: flex;
+		gap: 30px;
+		flex-direction: column;
+		height: 100%;
+		background-color: #090909;
+		padding: 50px;
+		min-height: 400px;
+		min-width: 320px;
+		max-width: 528px;
+		max-height: 640px;
+		border-radius: 6px;
+
+		position: relative;
+
+		@media (max-width: 528px) {
+			gap: 35px;
+			border-radius: 0;
+			padding: 4%;
+			min-width: 100%;
+			min-height: 100%;
+			max-width: none;
+			max-height: none;
+		}
+	}
+
+	&__close-button {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		cursor: pointer;
+		width: 35px;
+		height: 35px;
+		color: #fff;
+		font-size: 35px;
+		border-radius: 50%;
+
+		&:hover {
+			color: #090909;
+			background: #fcea49;
+			box-shadow: 0px 0px 6px #ddb900;
+		}
+	}
+
+	&__name {
+		display: flex;
+		font-size: 24px;
+		font-weight: bold;
+		color: #fff;
+
+		@media (max-width: 528px) {
+			margin-top: 40px;
+		}
+	}
+
+	&__description {
+		font-size: 14px;
+		color: #fff;
+
+		a {
+			color: #fcea49;
+			text-decoration: none;
+
+			&:hover {
+				color: #ddb900;
+			}
+		}
+	}
+
+	&__inputs {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	&__input-container {
+		position: relative;
+		display: flex;
+		align-items: center;
+		background-color: #1b1b1c;
+		border-radius: 6px;
+		padding: 4px;
+
+		label {
+			position: absolute;
+			top: 50%;
+			padding-left: 10px;
+			transform: translateY(-50%);
+			left: 0;
+			cursor: text;
+			font-size: 16px;
+			color: #fff;
+			transition: all 0.2s ease-in-out;
+		}
+
+		input {
+			color: #fff;
+			width: 100%;
+			border: none;
+			outline: none;
+			font-size: 16px;
+			padding: 8px;
+			background: transparent;
+
+			&:focus ~ label,
+			&:valid ~ label {
+				top: -12px;
+				font-size: 13px;
+			}
+		}
+	}
+
+	&__member {
+		display: flex;
+		color: #fff;
+		font-size: 14px;
+
+		a {
+			color: #fcea49;
+			cursor: pointer;
+			text-decoration: none;
+			font-size: 14px;
+
+			&:hover {
+				color: #ddb900;
+			}
+		}
+	}
+
+	&__button-register {
+		color: #1b1b1c;
+		background-color: #fcea49;
+		height: 40px;
+		border-radius: 6px;
+		font-size: 20px;
+		font-weight: 500;
+		margin-top: auto;
+
+		&:hover {
+			box-shadow: 0px 0px 6px #ddb900;
+		}
+	}
+}

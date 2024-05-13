@@ -1,0 +1,52 @@
+.cars-categories {
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 30px 0px;
+		letter-spacing: 1px;
+	}
+
+	&__title {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 36px;
+		color: #fff;
+	}
+
+	&__list {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+
+	&__list-item {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		cursor: pointer;
+		color: #fff;
+		min-height: 93px;
+		transition: transform 0.3s ease;
+
+		&:hover .cars-categories__item-img {
+			transform: scale(1.1);
+		}
+
+		&:hover .cars-categories__item-name {
+			color: #fcea49;
+			text-shadow: 0px 0px 6px #ddb900;
+		}
+	}
+
+	&__item-img {
+		width: 150px;
+		transition: transform 0.3s ease;
+	}
+
+	&__item-name {
+		display: flex;
+		justify-content: center;
+	}
+}

@@ -1,0 +1,29 @@
+@import 'scss-reset/reset';
+
+body {
+	margin: 0;
+	padding: 0;
+	margin-top: 80px;
+	padding-bottom: 140px;
+	font-family: 'Montserrat', Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-tap-highlight-color: transparent;
+}
+
+html {
+	background-color: #090909;
+	scroll-behavior: smooth;
+}
+
+.container {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1190px;
+	padding: 0 20px;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}

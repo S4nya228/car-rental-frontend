@@ -1,0 +1,16 @@
+.breadcrumb {
+	&__wrapper {
+		display: flex;
+		gap: 10px;
+		color: #fff;
+	}
+
+	&__link-to-main {
+		text-decoration: none;
+		color: #fff;
+	}
+
+	&__active-page {
+		color: #fcea49;
+	}
+}

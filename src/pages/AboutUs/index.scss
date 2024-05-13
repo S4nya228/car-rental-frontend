@@ -1,0 +1,65 @@
+.about-us {
+	padding: 50px 20px 0px 20px;
+	letter-spacing: 1px;
+
+	&__wrapper {
+		color: #fff;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	&__info-title {
+		font-size: 36px;
+		color: #fcea49;
+	}
+
+	&__info-subtitle {
+	}
+
+	&__items {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	&__item {
+	}
+
+	&__item-title {
+		font-size: 18px;
+		font-weight: 500;
+	}
+
+	&__item-decription {
+	}
+
+	&__terms {
+	}
+
+	&__terms-title {
+		span {
+			font-size: 18px;
+		}
+	}
+
+	&__terms-list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__feedback {
+	}
+
+	&__feedback-title {
+	}
+
+	&__feedback-description {
+	}
+}
