@@ -10,6 +10,7 @@ import CarFleet from './pages/CarFleet'
 import Car from './pages/Car'
 import Profile from './pages/Profile'
 import AboutUs from './pages/AboutUs'
+import Booking from './pages/Booking'
 function App() {
 	return (
 		<div className="app">
@@ -23,8 +24,8 @@ function App() {
 				<Route path="/car/id" element={<Car />} />
 				<Route path="*" element={<Navigate to="/" />} />
 				<Route path="/profile/*" element={<Profile />} />
+				<Route path="/booking" element={<Booking />} />
 			</Routes>
-
 			<Footer />
 		</div>
 	)

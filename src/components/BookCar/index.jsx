@@ -1,9 +1,8 @@
 import React from 'react'
 import './index.scss'
+import Form from '../Form'
 
 function BookCar() {
-	const minDateValue = new Date().toISOString().split('T')[0]
-
 	return (
 		<div className="book-car">
 			<div className="container">
@@ -27,31 +26,7 @@ function BookCar() {
 							обробки даних
 						</div>
 					</div>
-					<div className="book-car__form">
-						<input
-							type="number"
-							className="book-car__input"
-							placeholder="+38 (099) 123-45-78"
-						/>
-						<input
-							type="date"
-							min={minDateValue}
-							max="2030-01-01"
-							id="datePicker"
-							className="book-car__input"
-						/>
-						<input
-							type="number"
-							className="book-car__input"
-							placeholder="Термін аренди"
-						/>
-						<input
-							type="text"
-							className="book-car__input"
-							placeholder="Куди доставити автомобіль?"
-						/>
-						<button className="book-car__confirm">Підтвердити бронь</button>
-					</div>
+					<Form />
 				</div>
 			</div>
 		</div>

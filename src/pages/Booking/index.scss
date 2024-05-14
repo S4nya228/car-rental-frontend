@@ -1,0 +1,42 @@
+.booking {
+	padding: 50px 20px 0px 20px;
+	letter-spacing: 1px;
+
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
+
+	&__form {
+		border-radius: 6px;
+		padding: 70px;
+		background-color: #1b1b1c;
+		display: flex;
+		height: max-content;
+		justify-content: space-around;
+		gap: 30px;
+	}
+
+	&__info {
+		display: flex;
+		flex-direction: column;
+		flex-basis: 55%;
+		gap: 50px;
+	}
+
+	&__subtitle {
+		width: 80%;
+		font-size: 18px;
+		color: #fff;
+	}
+
+	&__policy {
+		width: 80%;
+		color: #68686e;
+	}
+
+	&__input {
+		flex-basis: 45%;
+	}
+}

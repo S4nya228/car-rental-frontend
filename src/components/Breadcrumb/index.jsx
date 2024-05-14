@@ -9,6 +9,7 @@ function Breadcrumb() {
 		'/about-us': 'Про нас',
 		'/profile': 'Акаунт',
 		'/profile/my-order': 'Мої бронювання',
+		'/booking': 'Бронювання',
 	}
 	const location = useLocation()
 	const pathnames = location.pathname.split('/').filter((x) => x)
