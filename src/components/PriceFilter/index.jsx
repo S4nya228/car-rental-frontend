@@ -2,12 +2,7 @@ import React, { useState } from 'react'
 import './index.scss'
 import { CaretDown, CaretUp } from 'react-bootstrap-icons'
 
-function PriceFilter() {
-	const [isOpen, setIsOpen] = useState(false)
-
-	const toggleDropdown = () => {
-		setIsOpen(!isOpen)
-	}
+function PriceFilter({ isOpen, toggleDropdown }) {
 	return (
 		<div className="filter-price">
 			<div className="filter-price__title" onClick={toggleDropdown}>

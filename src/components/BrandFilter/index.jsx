@@ -2,13 +2,8 @@ import React, { useState } from 'react'
 import './index.scss'
 import { CaretDown, CaretUp } from 'react-bootstrap-icons'
 
-function BrandFilter() {
+function BrandFilter({ isOpen, toggleDropdown }) {
 	const [checkedItems, setCheckedItems] = useState({})
-	const [isOpen, setIsOpen] = useState(false)
-
-	const toggleDropdown = () => {
-		setIsOpen(!isOpen)
-	}
 	const handleItemClick = (id) => {
 		setCheckedItems((prevState) => ({
 			...prevState,

@@ -11,18 +11,21 @@ const Header = () => {
 					<Link to="/" className="header__logo">
 						<img src="/src/assets/logo.png" alt="logo" />
 					</Link>
-					<div className="header__menu">
-						<Link to="car-fleet" className="header__menu-item">
-							<span>Автопарк</span>
-						</Link>
-						<Link to="/booking" className="header__menu-item">
-							<span>Бронювання</span>
-						</Link>
-						<Link to="/about-us" className="header__menu-item">
-							<span>Про нас</span>
-						</Link>
+					<div className="header__nav">
+						<div className="header__menu">
+							<Link to="car-fleet" className="header__item-fleet">
+								<span>Автопарк</span>
+							</Link>
+							<Link to="/booking" className="header__item-booking">
+								<span>Бронювання</span>
+							</Link>
+							<Link to="/about-us" className="header__item-about">
+								<span>Про нас</span>
+							</Link>
+						</div>
+						<Search />
 					</div>
-					<Search />
+
 					<div className="header__auth">
 						<Link to="/login" className="header__auth-link">
 							<span>Увійти</span>

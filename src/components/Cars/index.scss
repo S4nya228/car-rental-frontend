@@ -1,10 +1,21 @@
 .cars {
 	padding: 50px 20px 0px 20px;
 	letter-spacing: 1px;
+
+	@media (max-width: 768px) {
+		padding: 10px 10px 0px 10px;
+	}
 	&__wrapper {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 20px;
+
+		@media (max-width: 1200px) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		@media (max-width: 768px) {
+			grid-template-columns: repeat(1, 1fr);
+		}
 	}
 
 	&__item {
@@ -58,6 +69,13 @@
 		position: relative;
 		height: 20vw;
 		width: 100%;
+
+		@media (max-width: 1200px) {
+			height: 30vw;
+		}
+		@media (max-width: 768px) {
+			height: 50vw;
+		}
 	}
 
 	&__item-image {
@@ -82,7 +100,6 @@
 	}
 
 	&__item-name {
-		max-width: 75%;
 		margin: 5px 0;
 		font-size: 22px;
 		font-weight: 400;

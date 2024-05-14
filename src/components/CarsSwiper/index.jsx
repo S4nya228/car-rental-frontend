@@ -15,9 +15,21 @@ function CarsSwiper() {
 			<Swiper
 				modules={[Navigation, A11y, FreeMode]}
 				spaceBetween={35}
-				slidesPerView={3.25}
 				navigation
 				freeMode={true}
+				breakpoints={{
+					0: {
+						slidesPerView: 1.25,
+						spaceBetween: 15,
+					},
+					768: {
+						slidesPerView: 2.25,
+						spaceBetween: 15,
+					},
+					1200: {
+						slidesPerView: 3.25,
+					},
+				}}
 			>
 				<SwiperSlide>
 					<Link to="car/id" className="cars-swiper__item">

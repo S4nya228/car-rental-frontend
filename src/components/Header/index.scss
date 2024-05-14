@@ -4,10 +4,10 @@
 	width: 100%;
 	z-index: 1000;
 	background-color: #1b1b1c;
+
 	&__wrapper {
 		display: flex;
 		justify-content: space-between;
-
 		align-items: center;
 		margin: 0 auto;
 	}
@@ -17,13 +17,25 @@
 		max-height: 120px;
 	}
 
-	&__menu {
+	&__nav {
 		display: flex;
-		gap: 50px;
-		font-size: 1.125rem;
+		width: 100%;
+		align-items: center;
+		justify-content: space-around;
 	}
 
-	&__menu-item {
+	&__menu {
+		display: flex;
+		gap: 35px;
+		font-size: 1.125rem;
+		@media (max-width: 1065px) {
+			font-size: 16px;
+		}
+	}
+
+	&__item-fleet,
+	&__item-about,
+	&__item-booking {
 		letter-spacing: 1px;
 		text-decoration: none;
 		color: #fff;
@@ -41,6 +53,12 @@
 		}
 	}
 
+	&__item-about {
+		@media (max-width: 860px) {
+			display: none;
+		}
+	}
+
 	&__auth-link {
 		background-color: #fcea49;
 		padding: 0.6875rem 0.9375rem;
@@ -53,6 +71,10 @@
 
 		&:hover {
 			box-shadow: 0px 0px 6px #ddb900;
+		}
+
+		@media (max-width: 1065px) {
+			font-size: 16px;
 		}
 	}
 }
