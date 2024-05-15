@@ -1,6 +1,9 @@
 .booking {
 	padding: 50px 20px 0px 20px;
 	letter-spacing: 1px;
+	@media (max-width: 768px) {
+		padding: 10px 10px 0px 10px;
+	}
 
 	&__wrapper {
 		display: flex;
@@ -16,6 +19,13 @@
 		height: max-content;
 		justify-content: space-around;
 		gap: 30px;
+
+		@media (max-width: 1024px) {
+			padding: 20px;
+		}
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
 	}
 
 	&__info {
@@ -23,17 +33,28 @@
 		flex-direction: column;
 		flex-basis: 55%;
 		gap: 50px;
+
+		@media (max-width: 768px) {
+			gap: 20px;
+		}
 	}
 
 	&__subtitle {
 		width: 80%;
 		font-size: 18px;
 		color: #fff;
+
+		@media (max-width: 768px) {
+			width: 100%;
+		}
 	}
 
 	&__policy {
 		width: 80%;
 		color: #68686e;
+		@media (max-width: 768px) {
+			width: 100%;
+		}
 	}
 
 	&__input {

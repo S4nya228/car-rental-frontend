@@ -1,6 +1,10 @@
 .car {
 	padding: 50px 20px 0px 20px;
 	letter-spacing: 1px;
+
+	@media (max-width: 768px) {
+		padding: 5px;
+	}
 	&__wrapper {
 		display: flex;
 		flex-direction: column;
@@ -16,5 +20,9 @@
 		font-size: 30px;
 		font-weight: 500;
 		line-height: 1.25em;
+
+		@media (max-width: 768px) {
+			padding: 0;
+		}
 	}
 }

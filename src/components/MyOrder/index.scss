@@ -8,6 +8,10 @@
 		padding: 15px 30px 15px 10px;
 		border-radius: 6px;
 		background-color: #1b1b1c;
+
+		@media (max-width: 768px) {
+			padding: 15px 0;
+		}
 	}
 
 	&__title {
@@ -15,12 +19,22 @@
 		display: flex;
 		font-size: 20px;
 		justify-content: space-around;
+
+		@media (max-width: 650px) {
+			.order__title-item:first-child {
+				display: none; /* Перший елемент стає видимим на маленьких екранах */
+			}
+		}
 	}
 
 	&__items {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
+
+		@media (max-width: 650px) {
+			gap: 30px;
+		}
 	}
 
 	&__item {
@@ -45,10 +59,17 @@
 			border-radius: 6px;
 			object-fit: cover;
 		}
+
+		@media (max-width: 650px) {
+			display: none;
+		}
 	}
 
 	&__item-name {
 		color: #fff;
+		text-overflow: ellipsis;
+		white-space: nowrap; /* Забороняє перенос тексту */
+		overflow: hidden; /* Ховає текст, який не вміщується */
 	}
 
 	&__item-date {

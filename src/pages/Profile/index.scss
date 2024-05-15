@@ -5,6 +5,10 @@
 	letter-spacing: 1px;
 	gap: 30px;
 
+	@media (max-width: 768px) {
+		padding: 10px 10px 0px 10px;
+	}
+
 	&__wrapper {
 		display: flex;
 		flex-direction: column;

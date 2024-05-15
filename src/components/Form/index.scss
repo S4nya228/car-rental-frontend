@@ -12,6 +12,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+		width: 100%;
 	}
 
 	&__atction {
@@ -26,6 +27,7 @@
 		padding: 10px;
 		background-color: #090909;
 		border: 1px solid #fff;
+		width: 100%;
 
 		&::placeholder {
 			color: #68686e;

@@ -1,5 +1,4 @@
 .react-select-container {
-	max-width: 400px;
 	height: max-content;
 	background-color: #090909;
 	color: #fff;
@@ -7,10 +6,6 @@
 .react-select {
 	&__control {
 		padding: 15px;
-
-		@media (max-width: 768px) {
-			padding: 5px;
-		}
 	}
 
 	&__placeholder {

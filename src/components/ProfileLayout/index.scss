@@ -7,6 +7,10 @@
 		border-radius: 6px;
 		height: 400px;
 		background-color: #1b1b1c;
+
+		@media (max-width: 768px) {
+			padding: 10px;
+		}
 	}
 
 	&__items {
@@ -42,6 +46,12 @@
 		justify-content: space-between;
 		gap: 10px;
 		padding: 30px;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 10px;
+		}
 	}
 
 	&__edit {
@@ -62,6 +72,7 @@
 	&__exit {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		background-color: #fcea49;
 		padding: 0.6875rem 0.9375rem;
 		font-weight: 500;

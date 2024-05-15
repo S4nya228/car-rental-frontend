@@ -2,8 +2,13 @@
 	letter-spacing: 1px;
 	padding-top: 30px;
 	&__title {
+		display: flex;
 		color: #fcea49;
 		font-size: 22px;
+
+		@media (max-width: 768px) {
+			justify-content: center;
+		}
 	}
 
 	&__wrapper {
@@ -15,14 +20,23 @@
 	&__specs {
 		display: flex;
 		justify-content: space-around;
+		flex-wrap: wrap;
 		padding-top: 15px;
 		color: #fff;
+
+		@media (max-width: 500px) {
+			justify-content: center;
+		}
 	}
 
 	&__specs-item {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+
+		@media (max-width: 500px) {
+			flex-basis: 50%;
+		}
 	}
 
 	&__item-icon {
@@ -38,13 +52,22 @@
 	}
 
 	&__prices-title {
+		display: flex;
 		color: #fcea49;
 		font-size: 22px;
+
+		@media (max-width: 768px) {
+			justify-content: center;
+		}
 	}
 
 	&__prices-items {
 		display: flex;
 		justify-content: space-around;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
 	}
 
 	&__prices-item {
@@ -52,6 +75,16 @@
 		flex-direction: column;
 		gap: 35px;
 		align-items: center;
+
+		@media (max-width: 768px) {
+			flex-direction: row;
+			justify-content: space-between;
+			flex-basis: 100%;
+			font-size: 1.1em;
+			line-height: 1.75em;
+			border-bottom: 1px solid #fcea49;
+			margin-bottom: 0.5em;
+		}
 	}
 
 	&__item-name {
@@ -67,6 +100,10 @@
 			width: 1px;
 			height: 30px;
 			border-right: 1px solid #fcea49;
+
+			@media (max-width: 768px) {
+				display: none;
+			}
 		}
 	}
 }

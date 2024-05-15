@@ -49,6 +49,10 @@
 		height: 160px;
 		padding: 30px;
 		border: 1px solid #fcea49;
+
+		@media (max-width: 768px) {
+			height: 100px;
+		}
 	}
 
 	&__description {

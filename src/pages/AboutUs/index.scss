@@ -2,6 +2,10 @@
 	padding: 50px 20px 0px 20px;
 	letter-spacing: 1px;
 
+	@media (max-width: 768px) {
+		padding: 10px 10px 0px 10px;
+	}
+
 	&__wrapper {
 		color: #fff;
 		display: flex;
@@ -21,6 +25,10 @@
 	}
 
 	&__info-subtitle {
+		display: flex;
+		text-align: justify;
+		flex-wrap: wrap;
+		word-break: break-word;
 	}
 
 	&__items {
@@ -30,11 +38,16 @@
 	}
 
 	&__item {
+		display: flex;
+		text-align: justify;
+		flex-wrap: wrap;
+		word-break: break-word;
 	}
 
 	&__item-title {
 		font-size: 18px;
 		font-weight: 500;
+		color: #fcea49;
 	}
 
 	&__item-decription {
@@ -44,9 +57,8 @@
 	}
 
 	&__terms-title {
-		span {
-			font-size: 18px;
-		}
+		font-size: 18px;
+		color: #fcea49;
 	}
 
 	&__terms-list {
@@ -58,8 +70,15 @@
 	}
 
 	&__feedback-title {
+		font-size: 18px;
+		color: #fcea49;
 	}
 
 	&__feedback-description {
+		display: flex;
+		text-align: justify;
+		font-size: 1rem;
+		flex-wrap: wrap;
+		word-break: break-word;
 	}
 }

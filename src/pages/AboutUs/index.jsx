@@ -91,28 +91,28 @@ function AboutUs() {
 					<div className="about-us__terms">
 						<div className="about-us__terms-title">
 							<span>Умови аренди</span>
-							<div className="about-us__terms-list">
-								<span>1. Мінімальний вік водія: 21 рік.</span>
-								<span>2. Стаж водіння: не менше 10 місяців.</span>
-								<span>3. Документи: водійські права, паспорт.</span>
-								<span>
-									4. Страхування: усі наші автомобілі забезпечені повним
-									страховим покриттям.
-								</span>
+						</div>
+						<div className="about-us__terms-list">
+							<span>1. Мінімальний вік водія: 21 рік.</span>
+							<span>2. Стаж водіння: не менше 10 місяців.</span>
+							<span>3. Документи: водійські права, паспорт.</span>
+							<span>
+								4. Страхування: усі наші автомобілі забезпечені повним страховим
+								покриттям.
+							</span>
+						</div>
+						<div className="about-us__feedback">
+							<div className="about-us__feedback-title">
+								<span>Зв'яжіться з нами</span>
 							</div>
-							<div className="about-us__feedback">
-								<div className="about-us__feedback-title">
-									<span>Зв'яжіться з нами</span>
-								</div>
-								<div className="about-us__feedback-description">
-									<span>
-										Ми завжди раді вам допомогти з плануванням вашої наступної
-										подорожі. Зв'яжіться з нами сьогодні, і ми з радістю
-										допоможемо вам з усіма вашими потребами в оренді автомобіля!
-										Приєднуйтесь до Vroom Vibes сьогодні та відкрийте для себе
-										світ автомобільних пригод!
-									</span>
-								</div>
+							<div className="about-us__feedback-description">
+								<span>
+									Ми завжди раді вам допомогти з плануванням вашої наступної
+									подорожі. Зв'яжіться з нами сьогодні, і ми з радістю
+									допоможемо вам з усіма вашими потребами в оренді автомобіля!
+									Приєднуйтесь до Vroom Vibes сьогодні та відкрийте для себе
+									світ автомобільних пригод!
+								</span>
 							</div>
 						</div>
 					</div>
