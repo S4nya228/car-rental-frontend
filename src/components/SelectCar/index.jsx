@@ -20,7 +20,6 @@ function SelectCar() {
 		),
 	})
 
-	// Додавання статичних опцій до динамічних
 	const options = [generateGroupOption()]
 
 	return (

@@ -68,8 +68,8 @@
 	&__item-name {
 		color: #fff;
 		text-overflow: ellipsis;
-		white-space: nowrap; /* Забороняє перенос тексту */
-		overflow: hidden; /* Ховає текст, який не вміщується */
+		white-space: nowrap;
+		overflow: hidden;
 	}
 
 	&__item-date {

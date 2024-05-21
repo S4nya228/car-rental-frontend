@@ -153,4 +153,10 @@
 			box-shadow: 0px 0px 6px #ddb900;
 		}
 	}
+
+	&__member-holder {
+		display: flex;
+		flex-direction: column;
+		gap: 90px;
+	}
 }

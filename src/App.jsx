@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './App.css'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
@@ -11,10 +11,12 @@ import Car from './pages/Car'
 import Profile from './pages/Profile'
 import AboutUs from './pages/AboutUs'
 import Booking from './pages/Booking'
+import AuthUser from './components/UserInfo/getUserInfo'
 function App() {
 	return (
 		<div className="app">
 			<Header />
+			<AuthUser />
 			<Routes>
 				<Route path="/" element={<HomePage />} index />
 				<Route path="/login" element={<Login />} />

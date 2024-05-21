@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import '../Header/index.scss'
 import { Link } from 'react-router-dom'
 import Search from '../Search'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const token = useSelector((state) => state.auth.token)
+	const userInfo = useSelector((state) => state.auth.userInfo)
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen)
@@ -40,9 +43,15 @@ const Header = () => {
 						<Search />
 					</div>
 					<div className="header__auth">
-						<Link to="/login" className="header__auth-link">
-							<span>Увійти</span>
-						</Link>
+						{userInfo ? (
+							<Link to="/profile" className="header__auth-name">
+								<span>{userInfo.name}</span>
+							</Link>
+						) : (
+							<Link to="/login" className="header__auth-link">
+								<span>Увійти</span>
+							</Link>
+						)}
 					</div>
 				</div>
 			</div>

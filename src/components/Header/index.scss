@@ -86,6 +86,29 @@
 		}
 	}
 
+	&__auth-name {
+		display: flex;
+		text-decoration: none;
+		color: #fff;
+		font-size: 1.125rem;
+		letter-spacing: 1px;
+		transition: all 250ms;
+		&:hover {
+			color: #fcea49;
+		}
+
+		span {
+			max-width: 185px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+
+			&:hover {
+				text-shadow: 0px 0px 6px #ddb900;
+			}
+		}
+	}
+
 	&__burger-menu {
 		display: none;
 		@media (max-width: 768px) {
