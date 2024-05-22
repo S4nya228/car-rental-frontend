@@ -6,7 +6,7 @@ import Filter from '../../components/Filter'
 import Cars from '../../components/Cars'
 function CarFleet() {
 	return (
-		<div className="cars">
+		<div className="cars-fleet">
 			<Breadcrumb />
 			<CarsCategories />
 			<Filter />

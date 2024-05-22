@@ -1,0 +1,11 @@
+.admin-page {
+	&__wrapper {
+		display: flex;
+	}
+
+	&__layout {
+		padding: 20px;
+		width: 100%;
+		height: auto;
+	}
+}

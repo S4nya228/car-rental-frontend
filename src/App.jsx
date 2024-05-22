@@ -12,6 +12,7 @@ import Profile from './pages/Profile'
 import AboutUs from './pages/AboutUs'
 import Booking from './pages/Booking'
 import AuthUser from './components/UserInfo/getUserInfo'
+import AdminPage from './pages/AdminPage'
 function App() {
 	return (
 		<div className="app">
@@ -27,6 +28,7 @@ function App() {
 				<Route path="*" element={<Navigate to="/" />} />
 				<Route path="/profile/*" element={<Profile />} />
 				<Route path="/booking" element={<Booking />} />
+				<Route path="/admin/*" element={<AdminPage />} />
 			</Routes>
 			<Footer />
 		</div>
