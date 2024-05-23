@@ -2,7 +2,7 @@ import React from 'react'
 import './index.scss'
 import SideBar from '../../components/Admin/SideBar'
 import { Route, Routes } from 'react-router-dom'
-import AdminCars from '../../components/Admin/Cars'
+import AdminCars from '../../components/Admin/AdminCars'
 import AdminOrder from '../../components/Admin/Order'
 
 function AdminPage() {
