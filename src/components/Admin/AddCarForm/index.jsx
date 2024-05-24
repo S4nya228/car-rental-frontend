@@ -34,6 +34,17 @@ export default function AddCarForm({
 			<DialogTitle>Додати авто</DialogTitle>
 			<form onSubmit={handleAddCar}>
 				<DialogContent>
+					<TextField
+						margin="dense"
+						name="name"
+						label="Назва"
+						type="text"
+						fullWidth
+						variant="standard"
+						value={newCar.name}
+						onChange={handleChange}
+						required
+					/>
 					<FormControl fullWidth margin="dense">
 						<InputLabel>Клас авто</InputLabel>
 						<Select

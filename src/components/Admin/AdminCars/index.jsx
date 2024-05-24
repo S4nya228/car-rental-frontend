@@ -11,6 +11,7 @@ export default function AdminCars() {
 	const [cars, setCars] = useState([])
 	const [currentCar, setCurrentCar] = useState(null)
 	const [newCar, setNewCar] = useState({
+		name: '',
 		car_class: '',
 		brand: '',
 		color: '',
@@ -49,13 +50,14 @@ export default function AdminCars() {
 		setOpenEdit(false)
 	}
 
-	const handleChange = (e) => {
-		const { name, value } = e.target
-		if (openAdd) {
-			setNewCar({ ...newCar, [name]: value })
-		} else if (openEdit) {
-			setCurrentCar({ ...currentCar, [name]: value })
-		}
+	function handleChange(event) {
+		const { name, value } = event.target
+
+		setCurrentCar((prevCar) => ({
+			...prevCar,
+			[name]: value,
+		}))
+		console.log(currentCar)
 	}
 
 	const handleFileChange = (e) => {
@@ -90,6 +92,7 @@ export default function AdminCars() {
 			setCars((prevCars) => [...prevCars, addedCar])
 			setOpenAdd(false)
 			setNewCar({
+				name: '',
 				car_class: '',
 				brand: '',
 				color: '',
@@ -119,11 +122,21 @@ export default function AdminCars() {
 		})
 
 		try {
-			await axiosInstance.put(`/admin/cars/${currentCar.id}`, formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			})
+			await axiosInstance.patch(
+				`/admin/cars/${currentCar.id}`,
+
+				{
+					name: currentCar.name,
+					car_class: currentCar.car_class,
+					brand: currentCar.brand,
+					color: currentCar.color,
+					engine_type: currentCar.engine_type,
+					engine_power: currentCar.engine_power,
+					wheel_drive: currentCar.wheel_drive,
+					zero_to_full: currentCar.zero_to_full,
+					price: currentCar.price,
+				}
+			)
 
 			fetchCars()
 			setOpenEdit(false)

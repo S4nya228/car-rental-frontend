@@ -81,13 +81,15 @@ const Header = () => {
 						</Link>
 					</div>
 					<div className="sidebar-menu__auth">
-						<Link
-							to="/login"
-							onClick={toggleMenu}
-							className="sidebar-menu__auth-link"
-						>
-							<span>Увійти</span>
-						</Link>
+						{userInfo ? (
+							<Link to="/profile" className="header__auth-name">
+								<span>{userInfo.name}</span>
+							</Link>
+						) : (
+							<Link to="/login" className="header__auth-link">
+								<span>Увійти</span>
+							</Link>
+						)}
 					</div>
 				</div>
 				<Search />

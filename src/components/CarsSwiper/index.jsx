@@ -1,12 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navigation, A11y, FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import axiosInstance from '../../api/axiosInstance'
+
 import './index.scss'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/free-mode'
 import { Link } from 'react-router-dom'
+
 function CarsSwiper() {
+	const [cars, setCars] = useState([])
+
+	useEffect(() => {
+		fetchCars()
+	}, [])
+
+	const fetchCars = async () => {
+		try {
+			const response = await axiosInstance.get('/cars')
+			const data = response.data.data
+			setCars(data)
+		} catch (error) {
+			console.error('Error fetching cars:', error)
+		}
+	}
+
+	const carImage = (car) => {
+		return car.image_path &&
+			Array.isArray(car.image_path) &&
+			car.image_path.length > 0
+			? `${axiosInstance.defaults.baseURL}/getImage/${car.image_path[0]}`
+			: ''
+	}
+
 	return (
 		<div className="cars-swiper">
 			<div className="cars-swiper__title">
@@ -31,127 +58,42 @@ function CarsSwiper() {
 					},
 				}}
 			>
-				<SwiperSlide>
-					<Link to="car/id" className="cars-swiper__item">
-						<div className="cars-swiper__item-images">
-							<img
-								className="cars-swiper__item-image"
-								src="/src/assets/Swiper/BMW M8 Competition Grand Coupe.jpeg"
-								alt=""
-							/>
-						</div>
-						<div className="cars-swiper__item-description">
-							<div className="cars-swiper__item-name">
-								<span>BMW M8 Competition Grand Coupe</span>
+				{cars.map((car) => (
+					<SwiperSlide key={car.id}>
+						<Link to={`/car/${car.id}`} className="cars-swiper__item">
+							<div className="cars-swiper__item-images">
+								{carImage(car) ? (
+									<img
+										src={carImage(car)}
+										className="cars-swiper__item-image"
+										alt={`Car`}
+									/>
+								) : (
+									'Фото відсутнє'
+								)}
 							</div>
-							<div className="cars-swiper__item-price">
-								від <span>100$</span>
-							</div>
-							<div className="cars-swiper__item-characteristics">
-								<div className="cars-swiper__item-power">
-									<span>369</span>к.с
+							<div className="cars-swiper__item-description">
+								<div className="cars-swiper__item-name">
+									<span>{car.name}</span>
 								</div>
-								<div className="cars-swiper__item-liters">
-									<span>3.8</span>л
+								<div className="cars-swiper__item-price">
+									від <span>{car.price} ₴</span>
 								</div>
-								<div className="cars-swiper__item-occasion">
-									<span>Задній</span>
-								</div>
-							</div>
-						</div>
-					</Link>
-				</SwiperSlide>
-
-				<SwiperSlide>
-					<a href="#" className="cars-swiper__item">
-						<div className="cars-swiper__item-images">
-							<img
-								className="cars-swiper__item-image"
-								src="/src/assets/Swiper/Lamborghini Urus.jpeg"
-								alt=""
-							/>
-						</div>
-						<div className="cars-swiper__item-description">
-							<div className="cars-swiper__item-name">
-								<span>BMW M8 Competition Grand Coupe</span>
-							</div>
-							<div className="cars-swiper__item-price">
-								від <span>100$</span>
-							</div>
-							<div className="cars-swiper__item-characteristics">
-								<div className="cars-swiper__item-power">
-									<span>369</span>к.с
-								</div>
-								<div className="cars-swiper__item-liters">
-									<span>3.8</span>л
-								</div>
-								<div className="cars-swiper__item-occasion">
-									<span>Задній</span>
+								<div className="cars-swiper__item-characteristics">
+									<div className="cars-swiper__item-power">
+										<span>{car.engine_power}</span>к.с
+									</div>
+									<div className="cars-swiper__item-liters">
+										<span>{car.engine_type.label}</span>
+									</div>
+									<div className="cars-swiper__item-occasion">
+										<span>{car.zero_to_full} c</span>
+									</div>
 								</div>
 							</div>
-						</div>
-					</a>
-				</SwiperSlide>
-				<SwiperSlide>
-					<a href="#" className="cars-swiper__item">
-						<div className="cars-swiper__item-images">
-							<img
-								className="cars-swiper__item-image"
-								src="/src/assets/Swiper/Mercedes-Benz AMG GT 63.jpeg"
-								alt=""
-							/>
-						</div>
-						<div className="cars-swiper__item-description">
-							<div className="cars-swiper__item-name">
-								<span>BMW M8 Competition Grand Coupe</span>
-							</div>
-							<div className="cars-swiper__item-price">
-								від <span>100$</span>
-							</div>
-							<div className="cars-swiper__item-characteristics">
-								<div className="cars-swiper__item-power">
-									<span>369</span>к.с
-								</div>
-								<div className="cars-swiper__item-liters">
-									<span>3.8</span>л
-								</div>
-								<div className="cars-swiper__item-occasion">
-									<span>Задній</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</SwiperSlide>
-				<SwiperSlide>
-					<a href="#" className="cars-swiper__item">
-						<div className="cars-swiper__item-images">
-							<img
-								className="cars-swiper__item-image"
-								src="/src/assets/Swiper/Mercedes-Benz E63.jpeg"
-								alt=""
-							/>
-						</div>
-						<div className="cars-swiper__item-description">
-							<div className="cars-swiper__item-name">
-								<span>BMW M8 Competition Grand Coupe</span>
-							</div>
-							<div className="cars-swiper__item-price">
-								від <span>100$</span>
-							</div>
-							<div className="cars-swiper__item-characteristics">
-								<div className="cars-swiper__item-power">
-									<span>369</span>к.с
-								</div>
-								<div className="cars-swiper__item-liters">
-									<span>3.8</span>л
-								</div>
-								<div className="cars-swiper__item-occasion">
-									<span>Задній</span>
-								</div>
-							</div>
-						</div>
-					</a>
-				</SwiperSlide>
+						</Link>
+					</SwiperSlide>
+				))}
 			</Swiper>
 		</div>
 	)

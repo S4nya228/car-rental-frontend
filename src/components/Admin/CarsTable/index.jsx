@@ -43,6 +43,7 @@ export default function CarsTable({
 			<Table>
 				<TableHead>
 					<TableRow>
+						<StyledTableCell className="cars-table__col">Назва</StyledTableCell>
 						<StyledTableCell className="cars-table__col">Клас</StyledTableCell>
 						<StyledTableCell className="cars-table__col">Бренд</StyledTableCell>
 						<StyledTableCell className="cars-table__col">Колір</StyledTableCell>
@@ -72,7 +73,10 @@ export default function CarsTable({
 									component="th"
 									scope="row"
 								>
-									{car.car_class}
+									{car.name}
+								</StyledTableCell>
+								<StyledTableCell className="cars-table__row">
+									{car.car_class.label}
 								</StyledTableCell>
 								<StyledTableCell className="cars-table__row">
 									{car.brand}
@@ -81,13 +85,13 @@ export default function CarsTable({
 									{car.color}
 								</StyledTableCell>
 								<StyledTableCell className="cars-table__row">
-									{car.engine_type}
+									{car.engine_type.label}
 								</StyledTableCell>
 								<StyledTableCell className="cars-table__row">
 									{car.engine_power}
 								</StyledTableCell>
 								<StyledTableCell className="cars-table__row">
-									{car.wheel_drive}
+									{car.wheel_drive.label}
 								</StyledTableCell>
 								<StyledTableCell className="cars-table__row">
 									{car.zero_to_full}

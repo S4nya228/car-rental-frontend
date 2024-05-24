@@ -74,6 +74,12 @@
 		}
 	}
 
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: 50px;
+	}
+
 	&__inputs {
 		display: flex;
 		flex-direction: column;

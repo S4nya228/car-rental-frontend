@@ -120,7 +120,9 @@ function Registration() {
 								Вже маєте акаунт? <Link to="/login">Увійти</Link>
 							</span>
 						</div>
-						<button className="registration__button-register">Register</button>
+						<button className="registration__button-register">
+							Зареєструватися
+						</button>
 					</div>
 				</form>
 			</div>

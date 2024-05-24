@@ -45,7 +45,7 @@ function Login() {
 						<a href="#">Політику конфіденційності</a>.
 					</span>
 				</div>
-				<form onSubmit={handleLogin}>
+				<form className="login__form" onSubmit={handleLogin}>
 					<div className="login__inputs">
 						<div className="login__email">
 							<div className="login__input-container">
@@ -86,6 +86,7 @@ function Login() {
 							</span>
 						</div>
 					</div>
+					<div className="login__button"></div>
 					<button className="login__button-login">Увійти</button>
 				</form>
 			</div>
