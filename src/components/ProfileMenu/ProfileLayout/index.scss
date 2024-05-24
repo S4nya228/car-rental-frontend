@@ -54,7 +54,14 @@
 		}
 	}
 
-	&__edit {
+	&__action {
+		display: flex;
+		gap: 10px;
+	}
+
+	&__edit,
+	&__save,
+	&__cancel {
 		background-color: #fcea49;
 		padding: 0.6875rem 0.9375rem;
 		font-weight: 500;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import './index.scss'
-import PriceFilter from '../PriceFilter'
-import BrandFilter from '../BrandFilter'
-import ColorFilter from '../ColorFilter'
-import PowerFilter from '../PowerFilter'
+import PriceFilter from './PriceFilter'
+import BrandFilter from './BrandFilter'
+import ColorFilter from './ColorFilter'
+import PowerFilter from './PowerFilter'
 
 function Filter() {
 	const [priceFilterOpen, setPriceFilterOpen] = useState(false)

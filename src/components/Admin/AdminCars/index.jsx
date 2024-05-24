@@ -50,19 +50,13 @@ export default function AdminCars() {
 		setOpenEdit(false)
 	}
 
-	const handleChange = (event) => {
+	function handleChange(event) {
 		const { name, value } = event.target
-		if (openAdd) {
-			setNewCar((prevCar) => ({
-				...prevCar,
-				[name]: value,
-			}))
-		} else if (openEdit) {
-			setCurrentCar((prevCar) => ({
-				...prevCar,
-				[name]: value,
-			}))
-		}
+
+		setCurrentCar((prevCar) => ({
+			...prevCar,
+			[name]: value,
+		}))
 	}
 
 	const handleFileChange = (e) => {

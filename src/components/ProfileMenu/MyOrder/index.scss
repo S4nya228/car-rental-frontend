@@ -14,6 +14,25 @@
 		}
 	}
 
+	&__massage {
+		display: flex;
+		text-align: center;
+		flex-direction: column;
+		justify-content: center;
+		align-self: center;
+		gap: 50px;
+	}
+
+	&__empty {
+		color: #fff;
+		font-size: 18px;
+	}
+
+	&__empty-description {
+		color: #fff;
+		font-size: 18px;
+	}
+
 	&__title {
 		color: #fff;
 		display: flex;
@@ -22,7 +41,7 @@
 
 		@media (max-width: 650px) {
 			.order__title-item:first-child {
-				display: none; /* Перший елемент стає видимим на маленьких екранах */
+				display: none;
 			}
 		}
 	}

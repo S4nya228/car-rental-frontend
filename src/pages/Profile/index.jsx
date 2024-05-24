@@ -2,8 +2,8 @@ import React from 'react'
 import './index.scss'
 import ProfileMenu from '../../components/ProfileMenu'
 import Breadcrumb from '../../components/Breadcrumb'
-import ProfileLayout from '../../components/ProfileLayout'
-import MyOrder from '../../components/MyOrder'
+import ProfileLayout from '../../components/ProfileMenu/ProfileLayout'
+import MyOrder from '../../components/ProfileMenu/MyOrder'
 import { Route, Routes } from 'react-router-dom'
 
 function Profile() {

@@ -4,13 +4,12 @@ import './index.scss'
 function CarInfo({ car }) {
 	const { price } = car
 
-	// Функція для обчислення ціни на основі базової ціни
 	const calculatePrice = (basePrice, days) => {
 		if (days <= 3) return basePrice
-		if (days <= 6) return basePrice * 0.85 // 15% знижка
-		if (days <= 13) return basePrice * 0.75 // 25% знижка
-		if (days <= 29) return basePrice * 0.65 // 35% знижка
-		return basePrice * 0.6 // 40% знижка для більше 30 днів
+		if (days <= 6) return basePrice * 0.85
+		if (days <= 13) return basePrice * 0.75
+		if (days <= 29) return basePrice * 0.65
+		return basePrice * 0.6
 	}
 
 	return (

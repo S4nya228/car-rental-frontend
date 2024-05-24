@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import './index.scss'
 import { BoxArrowRight } from 'react-bootstrap-icons'
 import { useSelector, useDispatch } from 'react-redux'
-import axiosInstance from '../../api/axiosInstance'
-import { setUserInfo, clearTokens } from '../../store/authSlice'
+import axiosInstance from '../../../api/axiosInstance'
+import { setUserInfo, clearTokens } from '../../../store/authSlice'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
@@ -37,9 +37,13 @@ function ProfileLayout() {
 			setEditMode(false)
 			toast.success('Інформація оновлена успішно')
 		} catch (error) {
-			console.error('Error updating user info:', error)
+			console.log('Error updating user info:', error)
 			toast.error('Помилка при оновленні інформації')
 		}
+	}
+
+	const handleCancelClick = () => {
+		setEditMode(false)
 	}
 
 	const handleLogout = async () => {
@@ -87,12 +91,20 @@ function ProfileLayout() {
 					</div>
 					<div className="profile-layout__actions">
 						{editMode ? (
-							<button
-								className="profile-layout__save"
-								onClick={handleSaveClick}
-							>
-								Зберегти зміни
-							</button>
+							<div className="profile-layout__action">
+								<button
+									className="profile-layout__save"
+									onClick={handleSaveClick}
+								>
+									Зберегти зміни
+								</button>
+								<button
+									className="profile-layout__cancel"
+									onClick={handleCancelClick}
+								>
+									Відміна
+								</button>
+							</div>
 						) : (
 							<button
 								className="profile-layout__edit"

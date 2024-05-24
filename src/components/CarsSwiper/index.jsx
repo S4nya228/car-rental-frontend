@@ -60,7 +60,7 @@ function CarsSwiper() {
 			>
 				{cars.map((car) => (
 					<SwiperSlide key={car.id}>
-						<Link to={`/car/${car.id}`} className="cars-swiper__item">
+						<Link to={`/car-fleet/${car.id}`} className="cars-swiper__item">
 							<div className="cars-swiper__item-images">
 								{carImage(car) ? (
 									<img
