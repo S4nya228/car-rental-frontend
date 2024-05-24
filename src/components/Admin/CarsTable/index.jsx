@@ -8,7 +8,6 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { IconButton } from '@mui/material'
-import { red } from '@mui/material/colors'
 import './index.scss'
 import { Pencil, Trash } from 'react-bootstrap-icons'
 

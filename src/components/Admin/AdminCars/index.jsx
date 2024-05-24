@@ -50,9 +50,16 @@ export default function AdminCars() {
 		setOpenEdit(false)
 	}
 
-	function handleChange(event) {
+	const handleNewCarChange = (event) => {
 		const { name, value } = event.target
+		setNewCar((prevCar) => ({
+			...prevCar,
+			[name]: value,
+		}))
+	}
 
+	const handleCurrentCarChange = (event) => {
+		const { name, value } = event.target
 		setCurrentCar((prevCar) => ({
 			...prevCar,
 			[name]: value,
@@ -66,8 +73,8 @@ export default function AdminCars() {
 	const handleAddCar = async (e) => {
 		e.preventDefault()
 
-		if (carPhotos.length < 3) {
-			alert('Додайте мінімум 3 фотографії')
+		if (carPhotos.length < 4) {
+			alert('Додайте мінімум 4 фотографії')
 			return
 		}
 
@@ -87,7 +94,8 @@ export default function AdminCars() {
 				},
 			})
 
-			const addedCar = response.data
+			const addedCar = response.data.data
+			console.log(addedCar, cars)
 			setCars((prevCars) => [...prevCars, addedCar])
 			setOpenAdd(false)
 			setNewCar({
@@ -121,21 +129,11 @@ export default function AdminCars() {
 		})
 
 		try {
-			await axiosInstance.patch(
-				`/admin/cars/${currentCar.id}`,
-
-				{
-					name: currentCar.name,
-					car_class: currentCar.car_class,
-					brand: currentCar.brand,
-					color: currentCar.color,
-					engine_type: currentCar.engine_type,
-					engine_power: currentCar.engine_power,
-					wheel_drive: currentCar.wheel_drive,
-					zero_to_full: currentCar.zero_to_full,
-					price: currentCar.price,
-				}
-			)
+			await axiosInstance.patch(`/admin/cars/${currentCar.id}`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			})
 
 			fetchCars()
 			setOpenEdit(false)
@@ -180,7 +178,7 @@ export default function AdminCars() {
 				handleClose={handleCloseAdd}
 				handleAddCar={handleAddCar}
 				newCar={newCar}
-				handleChange={handleChange}
+				handleChange={handleNewCarChange}
 				handleFileChange={handleFileChange}
 				carPhotos={carPhotos}
 				handleRemovePhoto={handleRemovePhoto}
@@ -191,7 +189,7 @@ export default function AdminCars() {
 					handleClose={handleCloseEdit}
 					handleEditCar={handleEditCar}
 					currentCar={currentCar}
-					handleChange={handleChange}
+					handleChange={handleCurrentCarChange}
 					handleFileChange={handleFileChange}
 					carPhotos={carPhotos}
 				/>

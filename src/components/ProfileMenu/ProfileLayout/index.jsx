@@ -70,7 +70,7 @@ function ProfileLayout() {
 								type="text"
 								placeholder="Ім'я"
 								className="profile-layout__item-name"
-								value={name}
+								value={userInfo ? userInfo.name : ''}
 								onChange={(e) => setName(e.target.value)}
 								readOnly={!editMode}
 								required
@@ -82,7 +82,7 @@ function ProfileLayout() {
 								type="email"
 								placeholder="Пошта"
 								className="profile-layout__item-email"
-								value={email}
+								value={userInfo ? userInfo.email : ''}
 								onChange={(e) => setEmail(e.target.value)}
 								readOnly={!editMode}
 								required

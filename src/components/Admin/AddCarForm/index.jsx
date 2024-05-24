@@ -41,7 +41,6 @@ export default function AddCarForm({
 						type="text"
 						fullWidth
 						variant="standard"
-						value={newCar.name}
 						onChange={handleChange}
 						required
 					/>
@@ -49,7 +48,6 @@ export default function AddCarForm({
 						<InputLabel>Клас авто</InputLabel>
 						<Select
 							name="car_class"
-							value={newCar.car_class}
 							onChange={handleChange}
 							variant="standard"
 							required
@@ -71,7 +69,6 @@ export default function AddCarForm({
 						type="text"
 						fullWidth
 						variant="standard"
-						value={newCar.brand}
 						onChange={handleChange}
 						required
 					/>
@@ -82,7 +79,6 @@ export default function AddCarForm({
 						type="text"
 						fullWidth
 						variant="standard"
-						value={newCar.color}
 						onChange={handleChange}
 						required
 					/>
@@ -108,7 +104,6 @@ export default function AddCarForm({
 						type="text"
 						fullWidth
 						variant="standard"
-						value={newCar.engine_power}
 						onChange={handleChange}
 						required
 					/>
@@ -116,7 +111,6 @@ export default function AddCarForm({
 						<InputLabel>Привід</InputLabel>
 						<Select
 							name="wheel_drive"
-							value={newCar.wheel_drive}
 							onChange={handleChange}
 							variant="standard"
 							required
@@ -133,7 +127,6 @@ export default function AddCarForm({
 						type="number"
 						fullWidth
 						variant="standard"
-						value={newCar.zero_to_full}
 						onChange={handleChange}
 						required
 					/>
@@ -144,7 +137,6 @@ export default function AddCarForm({
 						type="number"
 						fullWidth
 						variant="standard"
-						value={newCar.price}
 						onChange={handleChange}
 						required
 					/>
