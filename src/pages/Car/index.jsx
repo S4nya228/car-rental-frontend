@@ -40,7 +40,7 @@ function Car() {
 	return (
 		<div className="car">
 			<div className="car__wrapper">
-				<Breadcrumb />
+				<Breadcrumb car={carData} />
 				<div className="car__name">
 					<span>{carData.name}</span>
 				</div>

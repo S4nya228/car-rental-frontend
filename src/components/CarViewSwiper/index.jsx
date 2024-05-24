@@ -14,6 +14,7 @@ function CarViewSwiper({ images }) {
 				spaceBetween={35}
 				slidesPerView={2}
 				navigation
+				loop
 				centeredSlides
 			>
 				<div className="car-view__wrapper">
