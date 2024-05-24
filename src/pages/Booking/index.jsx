@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './index.scss'
 import Breadcrumb from '../../components/Breadcrumb'
 import Form from '../../components/Form'
-import Select from '../../components/SelectCar'
+import SelectCar from '../../components/SelectCar'
 import AdditionalInfo from '../../components/AdditionalInfo'
 
 function Booking() {
+	const [selectedCar, setSelectedCar] = useState(null)
+
+	const handleCarSelect = (car) => {
+		setSelectedCar(car)
+	}
+
+	const clearSelectedCar = () => {
+		setSelectedCar(null)
+	}
+
 	return (
 		<div className="booking">
 			<div className="container">
@@ -14,9 +24,11 @@ function Booking() {
 					<div className="booking__form">
 						<div className="booking__info">
 							<div className="booking__select">
-								<Select />
+								<SelectCar
+									onCarSelect={handleCarSelect}
+									selectedCar={selectedCar}
+								/>
 							</div>
-
 							<div className="booking__subtitle">
 								<span>
 									Ми зв'яжемося з Вами протягом години для уточнення деталей.
@@ -32,7 +44,10 @@ function Booking() {
 							</div>
 						</div>
 						<div className="booking__input">
-							<Form />
+							<Form
+								selectedCar={selectedCar}
+								clearSelectedCar={clearSelectedCar}
+							/>
 						</div>
 					</div>
 					<AdditionalInfo />

@@ -2,36 +2,41 @@
 	height: max-content;
 	background-color: #090909;
 	color: #fff;
-}
-.react-select {
-	&__control {
+
+	.react-select__control {
 		padding: 15px;
+		background-color: #090909;
+		border: 1px solid #fff;
+		color: #fff;
 	}
 
-	&__placeholder {
+	.react-select__placeholder {
 		font-size: 16px;
 		font-weight: 500;
+		color: #fff;
 	}
 
-	&__indicators {
+	.react-select__indicators {
 		cursor: pointer;
+
 		svg {
 			fill: #fff;
 		}
 	}
 
-	&__menu {
+	.react-select__menu {
 		background-color: #090909;
 		padding: 5px 10px 10px;
+		color: #fff;
 	}
 
-	&__menu-list {
+	.react-select__menu-list {
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
 	}
 
-	&__car {
+	.react-select__car {
 		display: flex;
 		align-items: center;
 		gap: 10px;
@@ -44,20 +49,21 @@
 		}
 	}
 
-	&__info-box {
+	.react-select__info-box {
 		display: flex;
 		font-size: 17px;
 		flex-direction: column;
 	}
 
-	&__desc-group {
+	.react-select__desc-group {
 		font-size: 13px;
 		color: #97989d;
 	}
 
-	&__option {
+	.react-select__option {
 		border-radius: 6px;
 		padding: 7px 5px;
+
 		&:hover {
 			cursor: pointer;
 			background-color: #1b1b1c;

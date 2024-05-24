@@ -4,7 +4,7 @@ import axiosInstance from '../../api/axiosInstance'
 import { useSelector } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
 
-function Form({ carId }) {
+function Form({ selectedCar, clearSelectedCar }) {
 	const token = useSelector((state) => state.auth.token)
 	const [phoneNumber, setPhoneNumber] = useState('')
 	const [bookingDate, setBookingDate] = useState('')
@@ -19,9 +19,10 @@ function Form({ carId }) {
 		setDestination('')
 	}
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (e) => {
+		e.preventDefault()
 		const bookingData = {
-			car_id: carId,
+			car_id: selectedCar.id,
 			phone_number: phoneNumber,
 			booking_date: bookingDate,
 			lease_term: leaseTerm,
@@ -29,11 +30,12 @@ function Form({ carId }) {
 		}
 
 		try {
-			const response = await axiosInstance.post('/booking', bookingData, {
+			await axiosInstance.post('/booking', bookingData, {
 				headers: { Authorization: `Bearer ${token}` },
 			})
 			toast.success('Бронювання підтверджено')
 			resetFormFields()
+			clearSelectedCar()
 		} catch (error) {
 			console.error('Error:', error.response)
 			toast.error('Помилка при бронюванні')
