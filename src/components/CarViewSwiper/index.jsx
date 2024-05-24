@@ -5,7 +5,8 @@ import './index.scss'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-function CarViewSwiper() {
+function CarViewSwiper({ images }) {
+	console.log(images)
 	return (
 		<div className="car-view">
 			<Swiper
@@ -13,38 +14,18 @@ function CarViewSwiper() {
 				spaceBetween={35}
 				slidesPerView={2}
 				navigation
-				loop
 				centeredSlides
 			>
 				<div className="car-view__wrapper">
-					<SwiperSlide>
-						<img
-							className="car-view__item-image"
-							src="/src/assets/ViewCar/BMW 520D Black/1.jpg"
-							alt=""
-						/>
-					</SwiperSlide>
-					<SwiperSlide>
-						<img
-							className="car-view__item-image"
-							src="/src/assets/ViewCar/BMW 520D Black/2.jpg"
-							alt=""
-						/>
-					</SwiperSlide>
-					<SwiperSlide>
-						<img
-							className="car-view__item-image"
-							src="/src/assets/ViewCar/BMW 520D Black/3.jpg"
-							alt=""
-						/>
-					</SwiperSlide>
-					<SwiperSlide>
-						<img
-							className="car-view__item-image"
-							src="/src/assets/ViewCar/BMW 520D Black/4.jpg"
-							alt=""
-						/>
-					</SwiperSlide>
+					{images.map((image, index) => (
+						<SwiperSlide key={index}>
+							<img
+								className="car-view__item-image"
+								src={image}
+								alt={`Car image ${index + 1}`}
+							/>
+						</SwiperSlide>
+					))}
 				</div>
 			</Swiper>
 		</div>

@@ -1,7 +1,18 @@
 import React from 'react'
 import './index.scss'
 
-function CarInfo() {
+function CarInfo({ car }) {
+	const { price } = car
+
+	// Функція для обчислення ціни на основі базової ціни
+	const calculatePrice = (basePrice, days) => {
+		if (days <= 3) return basePrice
+		if (days <= 6) return basePrice * 0.85 // 15% знижка
+		if (days <= 13) return basePrice * 0.75 // 25% знижка
+		if (days <= 29) return basePrice * 0.65 // 35% знижка
+		return basePrice * 0.6 // 40% знижка для більше 30 днів
+	}
+
 	return (
 		<div className="car-info">
 			<div className="container">
@@ -16,7 +27,7 @@ function CarInfo() {
 								src="/src/assets/icon-color.svg"
 								alt="icon-color"
 							/>
-							<span>Чорний</span>
+							<span>{car.color}</span>
 						</div>
 						<div className="car-info__specs-item">
 							<img
@@ -24,7 +35,7 @@ function CarInfo() {
 								src="/src/assets/icon-engine.svg"
 								alt="icon-engine"
 							/>
-							<span>Дизель</span>
+							<span>{car.engine_type.label}</span>
 						</div>
 						<div className="car-info__specs-item">
 							<img
@@ -32,7 +43,7 @@ function CarInfo() {
 								src="/src/assets/icon-power.svg"
 								alt="icon-power"
 							/>
-							<span>900 к/c</span>
+							<span>{car.engine_power} к/c</span>
 						</div>
 						<div className="car-info__specs-item">
 							<img
@@ -40,7 +51,7 @@ function CarInfo() {
 								src="/src/assets/icon-gear.svg"
 								alt="icon-gear"
 							/>
-							<span>Повний</span>
+							<span>{car.wheel_drive.label}</span>
 						</div>
 						<div className="car-info__specs-item">
 							<img
@@ -48,7 +59,7 @@ function CarInfo() {
 								src="/src/assets/icon-speed.svg"
 								alt="icon-speed"
 							/>
-							<span>7.2 с</span>
+							<span>{car.zero_to_full} с</span>
 						</div>
 					</div>
 					<div className="car-info__prices">
@@ -59,7 +70,7 @@ function CarInfo() {
 									<span>1-3 дні</span>
 								</div>
 								<div className="car-info__item-price">
-									<span>14 000₴</span>
+									<span>{calculatePrice(price, 3).toFixed(0)} ₴</span>
 								</div>
 							</div>
 							<div className="car-info__prices-item">
@@ -67,7 +78,7 @@ function CarInfo() {
 									<span>4-6 днів</span>
 								</div>
 								<div className="car-info__item-price">
-									<span>12 000₴</span>
+									<span>{calculatePrice(price, 6).toFixed(0)} ₴</span>
 								</div>
 							</div>
 							<div className="car-info__prices-item">
@@ -75,7 +86,7 @@ function CarInfo() {
 									<span>7-13 днів</span>
 								</div>
 								<div className="car-info__item-price">
-									<span>10 000₴</span>
+									<span>{calculatePrice(price, 13).toFixed(0)} ₴</span>
 								</div>
 							</div>
 							<div className="car-info__prices-item">
@@ -83,7 +94,7 @@ function CarInfo() {
 									<span>14-29 днів</span>
 								</div>
 								<div className="car-info__item-price">
-									<span>9 000₴</span>
+									<span>{calculatePrice(price, 29).toFixed(0)} ₴</span>
 								</div>
 							</div>
 							<div className="car-info__prices-item">
@@ -91,7 +102,7 @@ function CarInfo() {
 									<span>30+ днів</span>
 								</div>
 								<div className="car-info__item-price">
-									<span>8 000₴</span>
+									<span>{calculatePrice(price, 30).toFixed(0)} ₴</span>
 								</div>
 							</div>
 						</div>

@@ -25,10 +25,10 @@ function App() {
 				<Route path="/car-fleet" element={<CarFleet />} />
 				<Route path="/about-us" element={<AboutUs />} />
 				<Route path="/car/:id" element={<Car />} />
-				<Route path="*" element={<Navigate to="/" />} />
 				<Route path="/profile/*" element={<Profile />} />
 				<Route path="/booking" element={<Booking />} />
 				<Route path="/admin/*" element={<AdminPage />} />
+				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>
 			<Footer />
 		</div>
