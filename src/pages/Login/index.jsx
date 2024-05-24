@@ -80,11 +80,6 @@ function Login() {
 								Немає акаунту? <Link to="/register">Зареєструватися</Link>
 							</span>
 						</div>
-						<div className="login__remember-password">
-							<span>
-								Забули <a href="#">пароль</a>?
-							</span>
-						</div>
 					</div>
 					<div className="login__button"></div>
 					<button className="login__button-login">Увійти</button>

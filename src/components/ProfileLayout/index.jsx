@@ -1,40 +1,123 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './index.scss'
 import { BoxArrowRight } from 'react-bootstrap-icons'
+import { useSelector, useDispatch } from 'react-redux'
+import axiosInstance from '../../api/axiosInstance'
+import { setUserInfo, clearTokens } from '../../store/authSlice'
+import { ToastContainer, toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 function ProfileLayout() {
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+	const userInfo = useSelector((state) => state.auth.userInfo)
+	const token = useSelector((state) => state.auth.token)
+
+	const [editMode, setEditMode] = useState(false)
+	const [name, setName] = useState(userInfo?.name || '')
+	const [email, setEmail] = useState(userInfo?.email || '')
+
+	const handleEditClick = () => {
+		setEditMode(true)
+	}
+
+	const handleSaveClick = async () => {
+		try {
+			const response = await axiosInstance.post(
+				`/user/${userInfo.id}`,
+				{
+					name,
+					email,
+				},
+				{
+					headers: { Authorization: `Bearer ${token}` },
+				}
+			)
+			dispatch(setUserInfo(response.data.data))
+			setEditMode(false)
+			toast.success('Інформація оновлена успішно')
+		} catch (error) {
+			console.error('Error updating user info:', error)
+			toast.error('Помилка при оновленні інформації')
+		}
+	}
+
+	const handleLogout = async () => {
+		try {
+			await axiosInstance.post('/logout', null, {
+				headers: { Authorization: `Bearer ${token}` },
+			})
+			dispatch(clearTokens())
+			navigate('/')
+		} catch (error) {
+			console.error('Error logging out:', error)
+			toast.error('Помилка при виході')
+		}
+	}
+
 	return (
 		<div className="profile-layout">
 			<div className="container">
 				<div className="profile-layout__wrapper">
 					<div className="profile-layout__items">
 						<div className="profile-layout__item">
-							<label htmlFor="">Ім'я</label>
+							<label htmlFor="userName">Ім'я</label>
 							<input
 								type="text"
 								placeholder="Ім'я"
 								className="profile-layout__item-name"
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								readOnly={!editMode}
+								required
 							/>
 						</div>
 						<div className="profile-layout__item">
-							<label htmlFor="">Пошта</label>
+							<label htmlFor="userEmail">Пошта</label>
 							<input
 								type="email"
 								placeholder="Пошта"
 								className="profile-layout__item-email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								readOnly={!editMode}
+								required
 							/>
 						</div>
 					</div>
 					<div className="profile-layout__actions">
-						<button className="profile-layout__edit">
-							Редагувати інформацію
-						</button>
-						<button className="profile-layout__exit">
+						{editMode ? (
+							<button
+								className="profile-layout__save"
+								onClick={handleSaveClick}
+							>
+								Зберегти зміни
+							</button>
+						) : (
+							<button
+								className="profile-layout__edit"
+								onClick={handleEditClick}
+							>
+								Редагувати інформацію
+							</button>
+						)}
+						<button className="profile-layout__exit" onClick={handleLogout}>
 							Вихід <BoxArrowRight />
 						</button>
 					</div>
 				</div>
 			</div>
+			<ToastContainer
+				position="bottom-center"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 		</div>
 	)
 }

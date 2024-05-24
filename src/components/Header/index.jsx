@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 
 const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
-	const token = useSelector((state) => state.auth.token)
 	const userInfo = useSelector((state) => state.auth.userInfo)
 
 	const toggleMenu = () => {
