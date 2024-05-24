@@ -8,10 +8,9 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { IconButton } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
 import { red } from '@mui/material/colors'
 import './index.scss'
+import { Pencil, Trash } from 'react-bootstrap-icons'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -112,10 +111,10 @@ export default function CarsTable({
 								</StyledTableCell>
 								<StyledTableCell className="cars-table__row">
 									<IconButton onClick={() => handleEditCar(car)}>
-										<EditIcon color="primary" />
+										<Pencil className="cars-table__edit-icon" />
 									</IconButton>
 									<IconButton onClick={() => handleDeleteCar(car.id)}>
-										<DeleteIcon sx={{ color: red[500] }} />
+										<Trash className="cars-table__delete-icon" />
 									</IconButton>
 								</StyledTableCell>
 							</StyledTableRow>

@@ -11,4 +11,12 @@
 		text-align: center !important;
 		font-size: 16px !important;
 	}
+
+	&__delete-icon {
+		color: red;
+	}
+
+	&__edit-icon {
+		color: rgb(81, 81, 250);
+	}
 }

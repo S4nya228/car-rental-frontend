@@ -13,7 +13,7 @@ import {
 	Button,
 	IconButton,
 } from '@mui/material'
-import { Close as CloseIcon } from '@mui/icons-material'
+import { X } from 'react-bootstrap-icons'
 
 export default function AddCarForm({
 	open,
@@ -191,7 +191,7 @@ export default function AddCarForm({
 												backgroundColor: 'rgba(255, 255, 255, 0.8)',
 											}}
 										>
-											<CloseIcon />
+											<X />
 										</IconButton>
 									</div>
 								))}

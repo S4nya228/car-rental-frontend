@@ -10,7 +10,6 @@ function Breadcrumb({ car }) {
 		'/profile': 'Акаунт',
 		'/profile/my-order': 'Мої бронювання',
 		'/booking': 'Бронювання',
-		'/car': 'Автопарк',
 	}
 	const location = useLocation()
 	const pathnames = location.pathname.split('/').filter((x) => x)
@@ -25,17 +24,10 @@ function Breadcrumb({ car }) {
 					{pathnames.map((name, index) => {
 						const isLast = index === pathnames.length - 1
 						const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`
-						const displayName =
-							pathNamesMap[`/${pathnames.slice(0, index + 1).join('/')}`] ||
-							name
+						let displayName = pathNamesMap[routeTo] || name
 
-						if (isLast && car && routeTo.startsWith('/car/')) {
-							return (
-								<React.Fragment key={index}>
-									<span>/</span>
-									<span className="breadcrumb__active-page">{car.name}</span>
-								</React.Fragment>
-							)
+						if (isLast && car && routeTo.startsWith('/car-fleet/')) {
+							displayName = car.name
 						}
 
 						return (

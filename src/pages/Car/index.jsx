@@ -17,7 +17,6 @@ function Car() {
 				const response = await axiosInstance.get(`/cars/${id}`)
 				const data = response.data.data
 				setCarData(data)
-				console.log(data)
 			} catch (error) {
 				console.error('Error fetching car data:', error)
 			}
@@ -46,7 +45,7 @@ function Car() {
 				</div>
 				<CarViewSwiper images={carImages} />
 				<CarInfo car={carData} />
-				<BookCar carId={id} />
+				<BookCar car={carData} />
 			</div>
 		</div>
 	)

@@ -2,7 +2,7 @@ import React from 'react'
 import './index.scss'
 import Form from '../Form'
 
-function BookCar() {
+function BookCar({ car }) {
 	return (
 		<div className="book-car">
 			<div className="container">
@@ -10,7 +10,7 @@ function BookCar() {
 					<div className="book-car__info">
 						<div className="book-car__info-title">
 							<span>
-								Забронювати автомобіль <br /> BMW 7 Series
+								Забронювати автомобіль <br /> {car.name}
 							</span>
 							<div className="book-car__info-subtitle">
 								<span>
@@ -26,7 +26,7 @@ function BookCar() {
 							обробки даних
 						</div>
 					</div>
-					<Form />
+					<Form carId={car.id} />
 				</div>
 			</div>
 		</div>

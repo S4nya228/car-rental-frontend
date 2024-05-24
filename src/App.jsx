@@ -13,6 +13,8 @@ import AboutUs from './pages/AboutUs'
 import Booking from './pages/Booking'
 import AuthUser from './components/UserInfo/getUserInfo'
 import AdminPage from './pages/AdminPage'
+import 'react-toastify/dist/ReactToastify.css'
+
 function App() {
 	return (
 		<div className="app">
@@ -23,8 +25,8 @@ function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Registration />} />
 				<Route path="/car-fleet" element={<CarFleet />} />
+				<Route path="/car-fleet/:id" element={<Car />} />
 				<Route path="/about-us" element={<AboutUs />} />
-				<Route path="/car/:id" element={<Car />} />
 				<Route path="/profile/*" element={<Profile />} />
 				<Route path="/booking" element={<Booking />} />
 				<Route path="/admin/*" element={<AdminPage />} />

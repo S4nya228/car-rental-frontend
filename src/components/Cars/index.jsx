@@ -31,7 +31,7 @@ function Cars() {
 		<div className="cars">
 			<div className="cars__wrapper">
 				{cars.map((car) => (
-					<Link key={car.id} to={`/car/${car.id}`} className="cars__item">
+					<Link key={car.id} to={`/car-fleet/${car.id}`} className="cars__item">
 						<div className="cars__item-images">
 							<img
 								src={carImage(car)}

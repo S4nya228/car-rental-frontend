@@ -6,7 +6,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 function CarViewSwiper({ images }) {
-	console.log(images)
 	return (
 		<div className="car-view">
 			<Swiper
