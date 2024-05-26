@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './index.scss'
 import { CaretDown, CaretUp } from 'react-bootstrap-icons'
 
-function BrandFilter({ isOpen, toggleDropdown, cars }) {
-	const [checkedItems, setCheckedItems] = useState({})
-	const [brands, setBrands] = useState([])
+function BrandFilter({ isOpen, toggleDropdown, cars, filters, setFilters }) {
+	const [initialBrands, setInitialBrands] = useState([])
 
-	console.log(cars)
-	useEffect(() => {
-		if (cars) {
-			const uniqueBrands = [...new Set(cars.map((car) => car.brand))]
-			setBrands(uniqueBrands)
-		}
-	}, [cars])
-
-	const handleItemClick = (id) => {
-		setCheckedItems((prevState) => ({
-			...prevState,
-			[id]: !prevState[id],
+	const handleCheckboxChange = (e) => {
+		const { name, checked } = e.target
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			brands: checked
+				? [...prevFilters.brands, name]
+				: prevFilters.brands.filter((brand) => brand !== name),
 		}))
 	}
+
+	useEffect(() => {
+		if (initialBrands.length === 0 && cars.length > 0) {
+			const uniqueBrands = [...new Set(cars.map((car) => car.brand))]
+			setInitialBrands(uniqueBrands)
+		}
+	}, [cars, initialBrands])
 
 	return (
 		<div className="filter-brand">
@@ -30,22 +31,17 @@ function BrandFilter({ isOpen, toggleDropdown, cars }) {
 				className="filter-brand__items"
 				style={{ display: isOpen ? 'flex' : 'none' }}
 			>
-				{brands.map((brand, index) => (
-					<div
-						className="filter-brand__item"
-						key={index}
-						onClick={() => handleItemClick(`brand${index + 1}`)}
-					>
+				{initialBrands.map((brand) => (
+					<div className="filter-brand__item" key={brand}>
 						<div className="filter-checkbox">
 							<input
 								type="checkbox"
-								id={`brand${index + 1}`}
-								checked={checkedItems[`brand${index + 1}`]}
+								id={brand}
+								name={brand}
+								onChange={handleCheckboxChange}
+								checked={filters.brands.includes(brand)}
 							/>
-							<label
-								htmlFor={`brand${index + 1}`}
-								className="filter-checkmark"
-							></label>
+							<label htmlFor={brand} className="filter-checkmark"></label>
 							<p>{brand}</p>
 						</div>
 					</div>

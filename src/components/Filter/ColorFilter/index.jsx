@@ -1,15 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './index.scss'
 import { CaretDown, CaretUp } from 'react-bootstrap-icons'
 
-function ColorFilter({ isOpen, toggleDropdown }) {
-	const [checkedItems, setCheckedItems] = useState({})
-	const handleItemClick = (id) => {
-		setCheckedItems((prevState) => ({
-			...prevState,
-			[id]: !prevState[id],
+function ColorFilter({ isOpen, toggleDropdown, cars, filters, setFilters }) {
+	const [initialColors, setInitialColors] = useState([])
+
+	const handleCheckboxChange = (e) => {
+		const { name, checked } = e.target
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			color: checked
+				? [...prevFilters.color, name]
+				: prevFilters.color.filter((color) => color !== name),
 		}))
 	}
+
+	useEffect(() => {
+		if (initialColors.length === 0 && cars.length > 0) {
+			const uniqueColors = [...new Set(cars.map((car) => car.color))]
+			setInitialColors(uniqueColors)
+		}
+	}, [cars, initialColors])
+
 	return (
 		<div className="filter-color">
 			<div className="filter-color__title" onClick={toggleDropdown}>
@@ -19,62 +31,21 @@ function ColorFilter({ isOpen, toggleDropdown }) {
 				className="filter-color__items"
 				style={{ display: isOpen ? 'flex' : 'none' }}
 			>
-				<div
-					className="filter-color__item"
-					onClick={() => handleItemClick('color1')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="color1"
-							checked={checkedItems['color1']}
-						/>
-						<label htmlFor="color1" className="filter-checkmark"></label>
-						<p>Синій</p>
+				{initialColors.map((color) => (
+					<div className="filter-color__item" key={color}>
+						<div className="filter-checkbox">
+							<input
+								type="checkbox"
+								id={color}
+								name={color}
+								onChange={handleCheckboxChange}
+								checked={filters.color.includes(color)}
+							/>
+							<label htmlFor={color} className="filter-checkmark"></label>
+							<p>{color}</p>
+						</div>
 					</div>
-				</div>
-				<div
-					className="filter-color__item"
-					onClick={() => handleItemClick('color2')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="color2"
-							checked={checkedItems['color2']}
-						/>
-						<label htmlFor="color2" className="filter-checkmark"></label>
-						<p>Жовтий</p>
-					</div>
-				</div>
-				<div
-					className="filter-color__item"
-					onClick={() => handleItemClick('color3')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="color3"
-							checked={checkedItems['color3']}
-						/>
-						<label htmlFor="color3" className="filter-checkmark"></label>
-						<p>Червоний</p>
-					</div>
-				</div>
-				<div
-					className="filter-color__item"
-					onClick={() => handleItemClick('color4')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="color4"
-							checked={checkedItems['color4']}
-						/>
-						<label htmlFor="color4" className="filter-checkmark"></label>
-						<p>Чорний</p>
-					</div>
-				</div>
+				))}
 			</div>
 		</div>
 	)

@@ -5,8 +5,8 @@ import BrandFilter from './BrandFilter'
 import ColorFilter from './ColorFilter'
 import PowerFilter from './PowerFilter'
 
-function Filter({ cars }) {
-	const [filters, setFilters] = useState({
+function Filter({ cars, filters, setFilters }) {
+	const [filtersOpen, setFiltersOpen] = useState({
 		priceFilterOpen: false,
 		brandFilterOpen: false,
 		colorFilterOpen: false,
@@ -14,16 +14,16 @@ function Filter({ cars }) {
 	})
 
 	const handleFilterToggle = (filterName) => {
-		setFilters((prevFilters) => ({
+		setFiltersOpen((prevFilters) => ({
 			...prevFilters,
 			[filterName]: !prevFilters[filterName],
 		}))
 
-		const otherFilters = Object.keys(filters).filter(
+		const otherFilters = Object.keys(filtersOpen).filter(
 			(key) => key !== filterName
 		)
 		otherFilters.forEach((filter) =>
-			setFilters((prevFilters) => ({ ...prevFilters, [filter]: false }))
+			setFiltersOpen((prevFilters) => ({ ...prevFilters, [filter]: false }))
 		)
 	}
 
@@ -32,21 +32,31 @@ function Filter({ cars }) {
 			<div className="container">
 				<div className="filter__wrapper">
 					<PriceFilter
-						cars={cars}
-						isOpen={filters.priceFilterOpen}
+						isOpen={filtersOpen.priceFilterOpen}
 						toggleDropdown={() => handleFilterToggle('priceFilterOpen')}
+						filters={filters}
+						setFilters={setFilters}
 					/>
 					<BrandFilter
-						isOpen={filters.brandFilterOpen}
+						cars={cars}
+						isOpen={filtersOpen.brandFilterOpen}
 						toggleDropdown={() => handleFilterToggle('brandFilterOpen')}
+						filters={filters}
+						setFilters={setFilters}
 					/>
 					<ColorFilter
-						isOpen={filters.colorFilterOpen}
+						cars={cars}
+						isOpen={filtersOpen.colorFilterOpen}
 						toggleDropdown={() => handleFilterToggle('colorFilterOpen')}
+						filters={filters}
+						setFilters={setFilters}
 					/>
 					<PowerFilter
-						isOpen={filters.powerFilterOpen}
+						cars={cars}
+						isOpen={filtersOpen.powerFilterOpen}
 						toggleDropdown={() => handleFilterToggle('powerFilterOpen')}
+						filters={filters}
+						setFilters={setFilters}
 					/>
 				</div>
 			</div>

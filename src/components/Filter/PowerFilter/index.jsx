@@ -1,81 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './index.scss'
 import { CaretDown, CaretUp } from 'react-bootstrap-icons'
 
-function PowerFilter({ isOpen, toggleDropdown }) {
-	const [checkedItems, setCheckedItems] = useState({})
+function PowerFilter({ isOpen, toggleDropdown, filters, setFilters }) {
+	const staticEngineTypes = [
+		{ id: '0', label: 'Бензин' },
+		{ id: '1', label: 'Дизель' },
+		{ id: '2', label: 'Електрика' },
+		{ id: '3', label: 'Гібрид' },
+	]
 
-	const handleItemClick = (id) => {
-		setCheckedItems((prevState) => ({
-			...prevState,
-			[id]: !prevState[id],
+	const handleCheckboxChange = (e) => {
+		const { id, checked } = e.target
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			engineTypes: checked
+				? [...prevFilters.engineTypes, id]
+				: prevFilters.engineTypes.filter((type) => type !== id),
 		}))
 	}
+
 	return (
 		<div className="filter-power">
 			<div className="filter-power__title" onClick={toggleDropdown}>
-				<span>Потужність {isOpen ? <CaretUp /> : <CaretDown />}</span>
+				<span>Тип двигуна {isOpen ? <CaretUp /> : <CaretDown />}</span>
 			</div>
 			<div
 				className="filter-power__items"
 				style={{ display: isOpen ? 'flex' : 'none' }}
 			>
-				<div
-					className="filter-power__item"
-					onClick={() => handleItemClick('power1')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="power1"
-							checked={checkedItems['power1']}
-						/>
-						<label htmlFor="power1" className="filter-checkmark"></label>
-						<p>200-300 к/с</p>
+				{staticEngineTypes.map((type, index) => (
+					<div key={index} className="filter-power__item">
+						<div className="filter-checkbox">
+							<input
+								type="checkbox"
+								id={type.id}
+								name={type.label}
+								onChange={handleCheckboxChange}
+								checked={filters.engineTypes.includes(type.id)}
+							/>
+							<label htmlFor={type.id} className="filter-checkmark"></label>
+							<p>{type.label}</p>
+						</div>
 					</div>
-				</div>
-				<div
-					className="filter-power__item"
-					onClick={() => handleItemClick('power2')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="power2"
-							checked={checkedItems['power2']}
-						/>
-						<label htmlFor="power2" className="filter-checkmark"></label>
-						<p>300-400 к/с</p>
-					</div>
-				</div>
-				<div
-					className="filter-power__item"
-					onClick={() => handleItemClick('power3')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="power3"
-							checked={checkedItems['power3']}
-						/>
-						<label htmlFor="power3" className="filter-checkmark"></label>
-						<p>400-500 к/с</p>
-					</div>
-				</div>
-				<div
-					className="filter-power__item"
-					onClick={() => handleItemClick('power4')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="power4"
-							checked={checkedItems['power4']}
-						/>
-						<label htmlFor="power4" className="filter-checkmark"></label>
-						<p>500-600 к/с</p>
-					</div>
-				</div>
+				))}
 			</div>
 		</div>
 	)
