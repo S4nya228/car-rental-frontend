@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axiosInstance from '../../api/axiosInstance'
 import { useDispatch } from 'react-redux'
 import { setTokens } from '../../store/authSlice'
+import { ToastContainer, toast } from 'react-toastify'
 
 function Login() {
 	const navigate = useNavigate()
@@ -21,10 +22,25 @@ function Login() {
 			})
 
 			const { token, refreshToken } = response.data
+			if (!token || !refreshToken) {
+				throw new Error('Невірні дані для входу')
+			}
+
 			dispatch(setTokens({ token: token, refreshToken: refreshToken }))
 			navigate('/')
 		} catch (error) {
-			console.log('Error: ', error)
+			let errorMessage = 'Щось пішло не так, спробуйте ще раз.'
+			if (error.response?.status === 401) {
+				errorMessage = 'Невірні дані для входу'
+			} else if (error.response?.data?.errors) {
+				const firstErrorKey = Object.keys(error.response.data.errors)[0]
+				errorMessage = error.response.data.errors[firstErrorKey][0]
+			} else if (error.response?.data?.message) {
+				errorMessage = error.response.data.message
+			} else if (error.message) {
+				errorMessage = error.message
+			}
+			toast.error(errorMessage)
 		}
 	}
 
@@ -85,6 +101,17 @@ function Login() {
 					<button className="login__button-login">Увійти</button>
 				</form>
 			</div>
+			<ToastContainer
+				position="bottom-center"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 		</div>
 	)
 }

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axiosInstance from '../../api/axiosInstance'
 import { useDispatch } from 'react-redux'
 import { setTokens } from '../../store/authSlice'
+import { ToastContainer, toast } from 'react-toastify'
 
 function Registration() {
 	const navigate = useNavigate()
@@ -20,7 +21,7 @@ function Registration() {
 	const handleRegister = async (e) => {
 		e.preventDefault()
 		if (password !== confirmPassword) {
-			alert('Passwords do not match')
+			toast.error('Паролі не співпадають')
 			return
 		}
 
@@ -40,7 +41,14 @@ function Registration() {
 			dispatch(setTokens({ token: token, refreshToken: refreshToken }))
 			navigate('/')
 		} catch (error) {
-			console.error('Registration failed:', error)
+			let errorMessage = 'Щось пішло не так, спробуйте ще раз.'
+			if (error.response?.data?.errors) {
+				const firstErrorKey = Object.keys(error.response.data.errors)[0]
+				errorMessage = error.response.data.errors[firstErrorKey][0]
+			} else if (error.response?.data?.message) {
+				errorMessage = error.response.data.message
+			}
+			toast.error(errorMessage)
 		}
 	}
 	return (
@@ -126,6 +134,17 @@ function Registration() {
 					</div>
 				</form>
 			</div>
+			<ToastContainer
+				position="bottom-center"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 		</div>
 	)
 }

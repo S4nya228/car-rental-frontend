@@ -95,7 +95,6 @@ export default function AdminCars() {
 			})
 
 			const addedCar = response.data.data
-			console.log(addedCar, cars)
 			setCars((prevCars) => [...prevCars, addedCar])
 			setOpenAdd(false)
 			setNewCar({

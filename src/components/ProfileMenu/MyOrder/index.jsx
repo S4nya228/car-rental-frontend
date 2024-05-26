@@ -51,7 +51,7 @@ function MyOrder() {
 											<span>{order.car.name}</span>
 										</div>
 										<div className="order__item-date">
-											<span>{order.booking_date}</span>
+											{new Date(order.booking_date).toLocaleDateString('uk-UA')}
 										</div>
 										<div className="order__item-status">
 											<span>{order.order_status}</span>

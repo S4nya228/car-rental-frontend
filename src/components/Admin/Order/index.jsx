@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
+import axiosInstance from '../../../api/axiosInstance'
 import './index.scss'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -28,19 +29,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	},
 }))
 
-function createData(name, calories, fat, carbs, protein) {
-	return { name, calories, fat, carbs, protein }
-}
-
-const rows = [
-	createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-	createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-	createData('Eclair', 262, 16.0, 24, 6.0),
-	createData('Cupcake', 305, 3.7, 67, 4.3),
-	createData('Gingerbread', 356, 16.0, 49, 3.9),
-]
-
 export default function AdminOrder() {
+	const [orders, setOrders] = React.useState([])
+
+	React.useEffect(() => {
+		const fetchOrders = async () => {
+			try {
+				const response = await axiosInstance.get('/admin/booking')
+				setOrders(response.data.data)
+			} catch (error) {
+				console.error('Error fetching orders:', error)
+			}
+		}
+
+		fetchOrders()
+	}, [])
+
 	return (
 		<TableContainer className="admin-cars" component={Paper}>
 			<Table
@@ -50,23 +54,43 @@ export default function AdminOrder() {
 			>
 				<TableHead>
 					<TableRow>
-						<StyledTableCell>Замовлення</StyledTableCell>
-						<StyledTableCell align="right">Calories</StyledTableCell>
-						<StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-						<StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-						<StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+						<StyledTableCell align="center">ID Замовлення</StyledTableCell>
+						<StyledTableCell align="center">Автомобіль</StyledTableCell>
+						<StyledTableCell align="center">Дата</StyledTableCell>
+						<StyledTableCell align="center">Адреса</StyledTableCell>
+						<StyledTableCell align="center">Термін оренди</StyledTableCell>
+						<StyledTableCell align="center">Користувач</StyledTableCell>
+						<StyledTableCell align="center">Номер телефону</StyledTableCell>
+						<StyledTableCell align="center">Статус</StyledTableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{rows.map((row) => (
-						<StyledTableRow key={row.name}>
-							<StyledTableCell component="th" scope="row">
-								{row.name}
+					{orders.map((order) => (
+						<StyledTableRow key={order.id}>
+							<StyledTableCell align="center" component="th" scope="row">
+								{order.id}
 							</StyledTableCell>
-							<StyledTableCell align="right">{row.calories}</StyledTableCell>
-							<StyledTableCell align="right">{row.fat}</StyledTableCell>
-							<StyledTableCell align="right">{row.carbs}</StyledTableCell>
-							<StyledTableCell align="right">{row.protein}</StyledTableCell>
+							<StyledTableCell align="center">{order.car.name}</StyledTableCell>
+							<StyledTableCell align="center">
+								{new Date(order.booking_date).toLocaleDateString('uk-UA')}
+							</StyledTableCell>
+
+							<StyledTableCell align="center">
+								{order.destination}
+							</StyledTableCell>
+							<StyledTableCell align="center">
+								{order.lease_term} днів
+							</StyledTableCell>
+							<StyledTableCell align="center">
+								{order.user ? `${order.user.name}` : 'Невідомо'}
+							</StyledTableCell>
+							<StyledTableCell align="center">
+								{order.phone_number}
+							</StyledTableCell>
+
+							<StyledTableCell align="center">
+								{order.order_status}
+							</StyledTableCell>
 						</StyledTableRow>
 					))}
 				</TableBody>
