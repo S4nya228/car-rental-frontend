@@ -7,7 +7,7 @@ function Home() {
 		<main className="home">
 			<div className="home__video-background">
 				<video className="home__sleep-video" autoPlay loop muted>
-					<source src="/src/assets/background.mp4" type="video/mp4" />
+					<source src="/background.webm" type="video/webm" />
 				</video>
 				<div className="home__overlay"></div>
 			</div>

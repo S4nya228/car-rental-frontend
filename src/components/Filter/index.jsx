@@ -5,58 +5,48 @@ import BrandFilter from './BrandFilter'
 import ColorFilter from './ColorFilter'
 import PowerFilter from './PowerFilter'
 
-function Filter() {
-	const [priceFilterOpen, setPriceFilterOpen] = useState(false)
-	const [brandFilterOpen, setBrandFilterOpen] = useState(false)
-	const [colorFilterOpen, setColorFilterOpen] = useState(false)
-	const [powerFilterOpen, setPowerFilterOpen] = useState(false)
+function Filter({ cars }) {
+	const [filters, setFilters] = useState({
+		priceFilterOpen: false,
+		brandFilterOpen: false,
+		colorFilterOpen: false,
+		powerFilterOpen: false,
+	})
 
-	const handlePriceFilterToggle = () => {
-		setPriceFilterOpen(!priceFilterOpen)
-		setBrandFilterOpen(false)
-		setColorFilterOpen(false)
-		setPowerFilterOpen(false)
+	const handleFilterToggle = (filterName) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			[filterName]: !prevFilters[filterName],
+		}))
+
+		const otherFilters = Object.keys(filters).filter(
+			(key) => key !== filterName
+		)
+		otherFilters.forEach((filter) =>
+			setFilters((prevFilters) => ({ ...prevFilters, [filter]: false }))
+		)
 	}
 
-	const handleBrandFilterToggle = () => {
-		setBrandFilterOpen(!brandFilterOpen)
-		setPriceFilterOpen(false)
-		setColorFilterOpen(false)
-		setPowerFilterOpen(false)
-	}
-
-	const handleColorFilterToggle = () => {
-		setColorFilterOpen(!colorFilterOpen)
-		setPriceFilterOpen(false)
-		setBrandFilterOpen(false)
-		setPowerFilterOpen(false)
-	}
-
-	const handlePowerFilterToggle = () => {
-		setPowerFilterOpen(!powerFilterOpen)
-		setPriceFilterOpen(false)
-		setBrandFilterOpen(false)
-		setColorFilterOpen(false)
-	}
 	return (
 		<div className="filter">
 			<div className="container">
 				<div className="filter__wrapper">
 					<PriceFilter
-						isOpen={priceFilterOpen}
-						toggleDropdown={handlePriceFilterToggle}
+						cars={cars}
+						isOpen={filters.priceFilterOpen}
+						toggleDropdown={() => handleFilterToggle('priceFilterOpen')}
 					/>
 					<BrandFilter
-						isOpen={brandFilterOpen}
-						toggleDropdown={handleBrandFilterToggle}
+						isOpen={filters.brandFilterOpen}
+						toggleDropdown={() => handleFilterToggle('brandFilterOpen')}
 					/>
 					<ColorFilter
-						isOpen={colorFilterOpen}
-						toggleDropdown={handleColorFilterToggle}
+						isOpen={filters.colorFilterOpen}
+						toggleDropdown={() => handleFilterToggle('colorFilterOpen')}
 					/>
 					<PowerFilter
-						isOpen={powerFilterOpen}
-						toggleDropdown={handlePowerFilterToggle}
+						isOpen={filters.powerFilterOpen}
+						toggleDropdown={() => handleFilterToggle('powerFilterOpen')}
 					/>
 				</div>
 			</div>

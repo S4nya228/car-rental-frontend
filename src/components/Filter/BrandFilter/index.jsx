@@ -1,15 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.scss'
 import { CaretDown, CaretUp } from 'react-bootstrap-icons'
 
-function BrandFilter({ isOpen, toggleDropdown }) {
+function BrandFilter({ isOpen, toggleDropdown, cars }) {
 	const [checkedItems, setCheckedItems] = useState({})
+	const [brands, setBrands] = useState([])
+
+	console.log(cars)
+	useEffect(() => {
+		if (cars) {
+			const uniqueBrands = [...new Set(cars.map((car) => car.brand))]
+			setBrands(uniqueBrands)
+		}
+	}, [cars])
+
 	const handleItemClick = (id) => {
 		setCheckedItems((prevState) => ({
 			...prevState,
 			[id]: !prevState[id],
 		}))
 	}
+
 	return (
 		<div className="filter-brand">
 			<div className="filter-brand__title" onClick={toggleDropdown}>
@@ -19,62 +30,26 @@ function BrandFilter({ isOpen, toggleDropdown }) {
 				className="filter-brand__items"
 				style={{ display: isOpen ? 'flex' : 'none' }}
 			>
-				<div
-					className="filter-brand__item"
-					onClick={() => handleItemClick('brand1')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="brand1"
-							checked={checkedItems['brand1']}
-						/>
-						<label htmlFor="brand1" className="filter-checkmark"></label>
-						<p>Mercedes</p>
+				{brands.map((brand, index) => (
+					<div
+						className="filter-brand__item"
+						key={index}
+						onClick={() => handleItemClick(`brand${index + 1}`)}
+					>
+						<div className="filter-checkbox">
+							<input
+								type="checkbox"
+								id={`brand${index + 1}`}
+								checked={checkedItems[`brand${index + 1}`]}
+							/>
+							<label
+								htmlFor={`brand${index + 1}`}
+								className="filter-checkmark"
+							></label>
+							<p>{brand}</p>
+						</div>
 					</div>
-				</div>
-				<div
-					className="filter-brand__item"
-					onClick={() => handleItemClick('brand2')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="brand2"
-							checked={checkedItems['brand2']}
-						/>
-						<label htmlFor="brand2" className="filter-checkmark"></label>
-						<p>BMW</p>
-					</div>
-				</div>
-				<div
-					className="filter-brand__item"
-					onClick={() => handleItemClick('brand3')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="brand3"
-							checked={checkedItems['brand3']}
-						/>
-						<label htmlFor="brand3" className="filter-checkmark"></label>
-						<p>Audi</p>
-					</div>
-				</div>
-				<div
-					className="filter-brand__item"
-					onClick={() => handleItemClick('brand4')}
-				>
-					<div className="filter-checkbox">
-						<input
-							type="checkbox"
-							id="brand4"
-							checked={checkedItems['brand4']}
-						/>
-						<label htmlFor="brand4" className="filter-checkmark"></label>
-						<p>Lamborgini</p>
-					</div>
-				</div>
+				))}
 			</div>
 		</div>
 	)

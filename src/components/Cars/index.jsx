@@ -1,32 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './index.scss'
 import { Link } from 'react-router-dom'
-import axiosInstance from '../../api/axiosInstance'
 
-function Cars() {
-	const [cars, setCars] = useState([])
-
-	useEffect(() => {
-		fetchCars()
-	}, [])
-
-	const fetchCars = async () => {
-		try {
-			const response = await axiosInstance.get('/cars')
-			const data = response.data.data
-			setCars(data)
-		} catch (error) {
-			console.error('Error fetching cars:', error)
-		}
-	}
-
-	const carImage = (car) => {
-		return car.image_path &&
-			Array.isArray(car.image_path) &&
-			car.image_path.length > 0
-			? `${axiosInstance.defaults.baseURL}/getImage/${car.image_path[0]}`
-			: ''
-	}
+function Cars({ cars }) {
 	return (
 		<div className="cars">
 			<div className="cars__wrapper">
@@ -34,7 +10,9 @@ function Cars() {
 					<Link key={car.id} to={`/car-fleet/${car.id}`} className="cars__item">
 						<div className="cars__item-images">
 							<img
-								src={carImage(car)}
+								src={`${import.meta.env.VITE_API_BASE_URL}/getImage/${
+									car.image_path[0]
+								}`}
 								className="cars-swiper__item-image"
 								alt={`Car`}
 							/>
