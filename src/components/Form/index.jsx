@@ -3,9 +3,11 @@ import './index.scss'
 import axiosInstance from '../../api/axiosInstance'
 import { useSelector } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
-function Form({ selectedCar, clearSelectedCar }) {
+function Form({ carId, selectedCar, clearSelectedCar }) {
 	const token = useSelector((state) => state.auth.token)
+	const navigate = useNavigate()
 	const [phoneNumber, setPhoneNumber] = useState('')
 	const [bookingDate, setBookingDate] = useState('')
 	const [leaseTerm, setLeaseTerm] = useState('')
@@ -21,8 +23,20 @@ function Form({ selectedCar, clearSelectedCar }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+
+		if (!token) {
+			toast.error('Для бронювання потрібно увійти в систему')
+			navigate('/login')
+			return
+		}
+
+		if (!selectedCar?.id && !carId) {
+			toast.error('Будь ласка, оберіть автомобіль.')
+			return
+		}
+
 		const bookingData = {
-			car_id: selectedCar.id,
+			car_id: selectedCar?.id || carId,
 			phone_number: phoneNumber,
 			booking_date: bookingDate,
 			lease_term: leaseTerm,
@@ -35,9 +49,11 @@ function Form({ selectedCar, clearSelectedCar }) {
 			})
 			toast.success('Бронювання підтверджено')
 			resetFormFields()
-			clearSelectedCar()
+			if (selectedCar) {
+				clearSelectedCar()
+			}
 		} catch (error) {
-			console.error('Error:', error.response)
+			console.error('Error:', error)
 			toast.error('Помилка при бронюванні')
 		}
 	}

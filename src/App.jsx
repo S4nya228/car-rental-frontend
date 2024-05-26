@@ -14,22 +14,30 @@ import Booking from './pages/Booking'
 import AuthUser from './components/UserInfo/getUserInfo'
 import AdminPage from './pages/AdminPage'
 import 'react-toastify/dist/ReactToastify.css'
+import AuthRoute from './components/Routes/AuthRoute'
+import { useSelector } from 'react-redux'
+import AdminRoute from './components/Routes/AdminRoute'
 
 function App() {
+	const token = useSelector((state) => state.auth.token)
 	return (
 		<div className="app">
 			<Header />
 			<AuthUser />
 			<Routes>
 				<Route path="/" element={<HomePage />} index />
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Registration />} />
+				{!token && <Route path="/login" element={<Login />} />}{' '}
+				{!token && <Route path="/register" element={<Registration />} />}{' '}
 				<Route path="/car-fleet" element={<CarFleet />} />
 				<Route path="/car-fleet/:id" element={<Car />} />
 				<Route path="/about-us" element={<AboutUs />} />
-				<Route path="/profile/*" element={<Profile />} />
+				<Route element={<AuthRoute />}>
+					<Route path="/profile/*" element={<Profile />} />
+				</Route>
 				<Route path="/booking" element={<Booking />} />
-				<Route path="/admin/*" element={<AdminPage />} />
+				<Route element={<AdminRoute />}>
+					<Route path="/admin/*" element={<AdminPage />} />
+				</Route>
 				<Route path="*" element={<Navigate to="/" />} />
 			</Routes>
 			<Footer />
