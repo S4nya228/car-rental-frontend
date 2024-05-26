@@ -37,7 +37,9 @@ function PowerFilter({ isOpen, toggleDropdown, filters, setFilters }) {
 								id={type.id}
 								name={type.label}
 								onChange={handleCheckboxChange}
-								checked={filters.engineTypes.includes(type.id)}
+								checked={
+									filters.brands && filters.engineTypes.includes(type.id)
+								}
 							/>
 							<label htmlFor={type.id} className="filter-checkmark"></label>
 							<p>{type.label}</p>

@@ -39,7 +39,7 @@ function BrandFilter({ isOpen, toggleDropdown, cars, filters, setFilters }) {
 								id={brand}
 								name={brand}
 								onChange={handleCheckboxChange}
-								checked={filters.brands.includes(brand)}
+								checked={filters.brands && filters.brands.includes(brand)}
 							/>
 							<label htmlFor={brand} className="filter-checkmark"></label>
 							<p>{brand}</p>

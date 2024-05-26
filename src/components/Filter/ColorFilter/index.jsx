@@ -39,7 +39,7 @@ function ColorFilter({ isOpen, toggleDropdown, cars, filters, setFilters }) {
 								id={color}
 								name={color}
 								onChange={handleCheckboxChange}
-								checked={filters.color.includes(color)}
+								checked={filters.brands && filters.color.includes(color)}
 							/>
 							<label htmlFor={color} className="filter-checkmark"></label>
 							<p>{color}</p>

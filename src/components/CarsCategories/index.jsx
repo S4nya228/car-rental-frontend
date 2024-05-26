@@ -1,7 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './index.scss'
 
-function CarsCategories() {
+function CarsCategories({ onFilterChange }) {
+	const [selectedClass, setSelectedClass] = useState(null)
+
+	const classNamesMap = {
+		1: 'Бізнес',
+		2: 'Преміум',
+		3: 'Позашляховики',
+		4: 'Купе',
+		5: 'Кабріолети',
+		6: 'Спорткари',
+		7: 'Мінівени',
+		8: 'Електрокари',
+	}
+
+	const handleClassSelect = (classId) => {
+		if (selectedClass === classId) {
+			setSelectedClass(null)
+			onFilterChange((prevFilters) => ({ ...prevFilters, carClass: '' }))
+		} else {
+			setSelectedClass(classId)
+			onFilterChange((prevFilters) => ({ ...prevFilters, carClass: classId }))
+		}
+	}
+
 	return (
 		<div className="cars-categories">
 			<div className="container">
@@ -10,70 +33,24 @@ function CarsCategories() {
 						<span>Наші автомобілі</span>
 					</div>
 					<div className="cars-categories__list">
-						<a className="cars-categories__list-item">
-							<img
-								className="cars-categories__item-img"
-								src="/src/assets/car-icon-business.png"
-								alt="car-icon-business"
-							/>
-							<span className="cars-categories__item-name">Бізнес</span>
-						</a>
-						<a className="cars-categories__list-item">
-							<img
-								className="cars-categories__item-img"
-								src="/src/assets/car-icon-premium.png"
-								alt="car-icon-premium"
-							/>
-							<span className="cars-categories__item-name">Преміум</span>
-						</a>
-						<a className="cars-categories__list-item">
-							<img
-								className="cars-categories__item-img"
-								src="/src/assets/car-icon-off-roaders.png"
-								alt="car-icon-off-roaders"
-							/>
-							<span className="cars-categories__item-name">Позашляховики</span>
-						</a>
-						<a className="cars-categories__list-item">
-							<img
-								className="cars-categories__item-img"
-								src="/src/assets/car-icon-coupe.png"
-								alt="car-icon-coupe"
-							/>
-							<span className="cars-categories__item-name">Купе</span>
-						</a>
-						<a className="cars-categories__list-item">
-							<img
-								className="cars-categories__item-img"
-								src="/src/assets/car-icon-cabriolet.png"
-								alt="car-icon-cabriolet"
-							/>
-							<span className="cars-categories__item-name">Кабріолети</span>
-						</a>
-						<a className="cars-categories__list-item">
-							<img
-								className="cars-categories__item-img"
-								src="/src/assets/car-icon-sportcar.png"
-								alt="car-icon-sportcar"
-							/>
-							<span className="cars-categories__item-name">Спорткари</span>
-						</a>
-						<a className="cars-categories__list-item">
-							<img
-								className="cars-categories__item-img"
-								src="/src/assets/car-icon-minivan.png"
-								alt="car-icon-minivan"
-							/>
-							<span className="cars-categories__item-name">Мінівени</span>
-						</a>
-						<a className="cars-categories__list-item">
-							<img
-								className="cars-categories__item-img"
-								src="/src/assets/car-icon-electrocar.png"
-								alt="car-icon-electrocar"
-							/>
-							<span className="cars-categories__item-name">Електрокари</span>
-						</a>
+						{Object.keys(classNamesMap).map((key) => (
+							<a
+								key={key}
+								className={`cars-categories__list-item ${
+									selectedClass === parseInt(key) ? 'selected' : ''
+								}`}
+								onClick={() => handleClassSelect(parseInt(key))}
+							>
+								<img
+									className="cars-categories__item-img"
+									src={`/src/assets/${classNamesMap[key].toLowerCase()}.png`}
+									alt={`car-icon-${classNamesMap[key].toLowerCase()}`}
+								/>
+								<span className="cars-categories__item-name">
+									{classNamesMap[key]}
+								</span>
+							</a>
+						))}
 					</div>
 				</div>
 			</div>
