@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import AuthRoute from './components/Routes/AuthRoute'
 import AdminRoute from './components/Routes/AdminRoute'
 import { useSelector } from 'react-redux'
+import ScrollToTop from './components/ScrolToTop'
 
 function App() {
 	const token = useSelector((state) => state.auth.token)
@@ -25,6 +26,7 @@ function App() {
 		<div className="app">
 			<Header />
 			<AuthUser />
+			<ScrollToTop />
 			<Routes>
 				<Route path="/" element={<HomePage />} index />
 				{!token && <Route path="/login" element={<Login />} />}

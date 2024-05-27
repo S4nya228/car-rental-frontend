@@ -15,7 +15,7 @@ function CarFleet() {
 		engineTypes: [],
 		minPrice: '',
 		maxPrice: '',
-		carClass: '',
+		carClass: [],
 	})
 	const [debouncedFilters] = useDebounce(filters, 500)
 
@@ -29,7 +29,6 @@ function CarFleet() {
 				max_price: appliedFilters.maxPrice,
 				car_class: appliedFilters.carClass,
 			}
-			console.log(params)
 			const response = await axiosInstance.get('/cars', { params })
 			setCars(response.data.data)
 		} catch (error) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './index.scss'
 import { CaretDown, CaretUp } from 'react-bootstrap-icons'
 
@@ -18,6 +18,18 @@ function PowerFilter({ isOpen, toggleDropdown, filters, setFilters }) {
 				? [...prevFilters.engineTypes, id]
 				: prevFilters.engineTypes.filter((type) => type !== id),
 		}))
+		toggleDropdown()
+	}
+
+	const handleParagraphClick = (id) => {
+		const isChecked = filters.engineTypes && filters.engineTypes.includes(id)
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			engineTypes: isChecked
+				? prevFilters.engineTypes.filter((type) => type !== id)
+				: [...prevFilters.engineTypes, id],
+		}))
+		toggleDropdown()
 	}
 
 	return (
@@ -29,8 +41,8 @@ function PowerFilter({ isOpen, toggleDropdown, filters, setFilters }) {
 				className="filter-power__items"
 				style={{ display: isOpen ? 'flex' : 'none' }}
 			>
-				{staticEngineTypes.map((type, index) => (
-					<div key={index} className="filter-power__item">
+				{staticEngineTypes.map((type) => (
+					<div key={type.id} className="filter-power__item">
 						<div className="filter-checkbox">
 							<input
 								type="checkbox"
@@ -38,11 +50,11 @@ function PowerFilter({ isOpen, toggleDropdown, filters, setFilters }) {
 								name={type.label}
 								onChange={handleCheckboxChange}
 								checked={
-									filters.brands && filters.engineTypes.includes(type.id)
+									filters.engineTypes && filters.engineTypes.includes(type.id)
 								}
 							/>
 							<label htmlFor={type.id} className="filter-checkmark"></label>
-							<p>{type.label}</p>
+							<p onClick={() => handleParagraphClick(type.id)}>{type.label}</p>
 						</div>
 					</div>
 				))}

@@ -13,6 +13,18 @@ function BrandFilter({ isOpen, toggleDropdown, cars, filters, setFilters }) {
 				? [...prevFilters.brands, name]
 				: prevFilters.brands.filter((brand) => brand !== name),
 		}))
+		toggleDropdown()
+	}
+
+	const handleParagraphClick = (brand) => {
+		const isChecked = filters.brands && filters.brands.includes(brand)
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			brands: isChecked
+				? prevFilters.brands.filter((b) => b !== brand)
+				: [...prevFilters.brands, brand],
+		}))
+		toggleDropdown()
 	}
 
 	useEffect(() => {
@@ -42,7 +54,7 @@ function BrandFilter({ isOpen, toggleDropdown, cars, filters, setFilters }) {
 								checked={filters.brands && filters.brands.includes(brand)}
 							/>
 							<label htmlFor={brand} className="filter-checkmark"></label>
-							<p>{brand}</p>
+							<p onClick={() => handleParagraphClick(brand)}>{brand}</p>
 						</div>
 					</div>
 				))}

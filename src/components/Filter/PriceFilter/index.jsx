@@ -20,6 +20,7 @@ function PriceFilter({ isOpen, toggleDropdown, filters, setFilters }) {
 			minPrice: minPrice,
 			maxPrice: maxPrice,
 		}))
+		toggleDropdown()
 	}
 
 	return (

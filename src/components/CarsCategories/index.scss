@@ -53,4 +53,9 @@
 		display: flex;
 		justify-content: center;
 	}
+
+	.cars-categories__list-item.selected .cars-categories__item-name {
+		text-shadow: 0px 0px 6px #ddb900;
+		color: #fcea49;
+	}
 }

@@ -13,6 +13,18 @@ function ColorFilter({ isOpen, toggleDropdown, cars, filters, setFilters }) {
 				? [...prevFilters.color, name]
 				: prevFilters.color.filter((color) => color !== name),
 		}))
+		toggleDropdown()
+	}
+
+	const handleParagraphClick = (color) => {
+		const isChecked = filters.color && filters.color.includes(color)
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			color: isChecked
+				? prevFilters.color.filter((c) => c !== color)
+				: [...prevFilters.color, color],
+		}))
+		toggleDropdown()
 	}
 
 	useEffect(() => {
@@ -39,10 +51,10 @@ function ColorFilter({ isOpen, toggleDropdown, cars, filters, setFilters }) {
 								id={color}
 								name={color}
 								onChange={handleCheckboxChange}
-								checked={filters.brands && filters.color.includes(color)}
+								checked={filters.color && filters.color.includes(color)}
 							/>
 							<label htmlFor={color} className="filter-checkmark"></label>
-							<p>{color}</p>
+							<p onClick={() => handleParagraphClick(color)}>{color}</p>
 						</div>
 					</div>
 				))}

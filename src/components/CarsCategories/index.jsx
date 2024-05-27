@@ -6,13 +6,13 @@ function CarsCategories({ onFilterChange }) {
 
 	const classNamesMap = {
 		1: 'Бізнес',
-		2: 'Преміум',
-		3: 'Позашляховики',
-		4: 'Купе',
-		5: 'Кабріолети',
-		6: 'Спорткари',
-		7: 'Мінівени',
-		8: 'Електрокари',
+		2: 'Кабріолети',
+		3: 'Купе',
+		4: 'Електрокари',
+		5: 'Мінівени',
+		6: 'Позашляховики',
+		7: 'Преміум',
+		8: 'Спорткари',
 	}
 
 	const handleClassSelect = (classId) => {
@@ -46,7 +46,11 @@ function CarsCategories({ onFilterChange }) {
 									src={`/src/assets/${classNamesMap[key].toLowerCase()}.png`}
 									alt={`car-icon-${classNamesMap[key].toLowerCase()}`}
 								/>
-								<span className="cars-categories__item-name">
+								<span
+									className={`cars-categories__item-name ${
+										selectedClass === parseInt(key) ? 'selected' : ''
+									}`}
+								>
 									{classNamesMap[key]}
 								</span>
 							</a>
