@@ -8,9 +8,10 @@ function MyOrder() {
 	const orders = userInfo && userInfo.orders ? userInfo.orders : []
 
 	const carImage = (order) => {
+		if (!order || !order.car) return ''
 		const imagePaths = order.car.image_path.split(',')
 		return imagePaths.length > 0
-			? `${axiosInstance.defaults.baseURL}/getImage/${imagePaths[0]}`
+			? `${axiosInstance.defaults.baseURL}/getImage/${imagePaths[0]}` // Використовуйте перше зображення
 			: ''
 	}
 
@@ -42,13 +43,13 @@ function MyOrder() {
 								</div>
 							</div>
 							<div className="order__items">
-								{orders.map((order) => (
-									<div key={order.car_id} className="order__item">
+								{orders.map((order, index) => (
+									<div key={`${order.car_id}-${index}`} className="order__item">
 										<div className="order__item-image">
 											<img src={carImage(order)} alt="image" />
 										</div>
 										<div className="order__item-name">
-											<span>{order.car.name}</span>
+											<span>{order.car ? order.car.name : 'Немає даних'}</span>
 										</div>
 										<div className="order__item-date">
 											{new Date(order.booking_date).toLocaleDateString('uk-UA')}

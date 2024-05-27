@@ -1,9 +1,10 @@
 import React from 'react'
 import './index.scss'
 import SideBar from '../../components/Admin/SideBar'
-import { Route, Routes } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import AdminCars from '../../components/Admin/AdminCars'
 import AdminOrder from '../../components/Admin/Order'
+import AuthRoute from '../../components/Routes/AuthRoute'
 
 function AdminPage() {
 	return (
@@ -12,8 +13,10 @@ function AdminPage() {
 				<SideBar />
 				<div className="admin-page__layout">
 					<Routes>
-						<Route path="/" element={<AdminCars />} />
-						<Route path="/order" element={<AdminOrder />} />
+						<Route element={<AuthRoute />}>
+							<Route path="/" element={<AdminCars />} />
+							<Route path="/order" element={<AdminOrder />} />
+						</Route>
 					</Routes>
 				</div>
 			</div>

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import './index.scss'
 import axiosInstance from '../../api/axiosInstance'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { addOrder } from '../../store/authSlice'
 
 function Form({ carId, selectedCar, clearSelectedCar }) {
 	const token = useSelector((state) => state.auth.token)
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const [phoneNumber, setPhoneNumber] = useState('')
 	const [bookingDate, setBookingDate] = useState('')
@@ -44,7 +46,7 @@ function Form({ carId, selectedCar, clearSelectedCar }) {
 		}
 
 		try {
-			await axiosInstance.post('/booking', bookingData, {
+			const response = await axiosInstance.post('/booking', bookingData, {
 				headers: { Authorization: `Bearer ${token}` },
 			})
 			toast.success('Бронювання підтверджено')
@@ -52,6 +54,8 @@ function Form({ carId, selectedCar, clearSelectedCar }) {
 			if (selectedCar) {
 				clearSelectedCar()
 			}
+			console.log(response.data.data)
+			dispatch(addOrder(response.data.data))
 		} catch (error) {
 			console.error('Error:', error)
 			toast.error('Помилка при бронюванні')

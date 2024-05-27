@@ -134,7 +134,7 @@ export default function AddCarForm({
 						margin="dense"
 						name="price"
 						label="Ціна"
-						type="number"
+						type="text"
 						fullWidth
 						variant="standard"
 						onChange={handleChange}

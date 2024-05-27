@@ -7,6 +7,10 @@ import {
 	TextField,
 	Box,
 	Button,
+	FormControl,
+	Select,
+	MenuItem,
+	InputLabel,
 } from '@mui/material'
 
 export default function EditCarForm({
@@ -44,25 +48,25 @@ export default function EditCarForm({
 						onChange={handleChange}
 						required
 					/>
-					<div style={{ marginTop: 16 }}>
-						<label>Клас авто</label>
-						<select
+					<FormControl fullWidth margin="dense">
+						<InputLabel>Клас авто</InputLabel>
+						<Select
 							name="car_class"
-							value={currentCar.car_class.id || ''}
 							onChange={handleChange}
+							variant="standard"
 							required
-							style={{ width: '100%', padding: '8px', marginTop: '8px' }}
 						>
-							<option value="1">Бізнес</option>
-							<option value="2">Кабріолет</option>
-							<option value="3">Купе</option>
-							<option value="4">Електрокар</option>
-							<option value="5">Мінівен</option>
-							<option value="6">Позашляховик</option>
-							<option value="7">Преміум</option>
-							<option value="8">Спорткар</option>
-						</select>
-					</div>
+							<MenuItem value="1">Бізнес</MenuItem>
+							<MenuItem value="2">Кабріолет</MenuItem>
+							<MenuItem value="3">Купе</MenuItem>
+							<MenuItem value="4">Електрокар</MenuItem>
+							<MenuItem value="5">Мінівен</MenuItem>
+							<MenuItem value="6">Позашляховик</MenuItem>
+							<MenuItem value="7">Преміум</MenuItem>
+							<MenuItem value="8">Спорткар</MenuItem>
+						</Select>
+					</FormControl>
+
 					<TextField
 						margin="dense"
 						name="brand"
@@ -85,46 +89,44 @@ export default function EditCarForm({
 						onChange={handleChange}
 						required
 					/>
-					<div style={{ marginTop: 16 }}>
-						<label>Тип двигуна</label>
-						<select
+					<FormControl fullWidth margin="dense">
+						<InputLabel>Тип двигуна</InputLabel>
+						<Select
 							name="engine_type"
-							value={currentCar.engine_type.id || ''}
 							onChange={handleChange}
+							variant="standard"
 							required
-							style={{ width: '100%', padding: '8px', marginTop: '8px' }}
 						>
-							<option value="0">Бензин</option>
-							<option value="1">Дизель</option>
-							<option value="2">Електрика</option>
-							<option value="3">Гібрид</option>
-						</select>
-					</div>
+							<MenuItem value="0">Бензин</MenuItem>
+							<MenuItem value="1">Дизель</MenuItem>
+							<MenuItem value="2">Електрика</MenuItem>
+							<MenuItem value="3">Гібрид</MenuItem>
+						</Select>
+					</FormControl>
 					<TextField
 						margin="dense"
 						name="engine_power"
 						label="Потужність"
 						type="text"
 						fullWidth
-						variant="standard"
 						value={currentCar.engine_power}
+						variant="standard"
 						onChange={handleChange}
 						required
 					/>
-					<div style={{ marginTop: 16 }}>
-						<label>Привід</label>
-						<select
+					<FormControl fullWidth margin="dense">
+						<InputLabel>Привід</InputLabel>
+						<Select
 							name="wheel_drive"
-							value={currentCar.wheel_drive.id || ''}
 							onChange={handleChange}
+							variant="standard"
 							required
-							style={{ width: '100%', padding: '8px', marginTop: '8px' }}
 						>
-							<option value="1">Повний привід</option>
-							<option value="2">Передній привід</option>
-							<option value="3">Задній привід</option>
-						</select>
-					</div>
+							<MenuItem value="1">Повний привід</MenuItem>
+							<MenuItem value="2">Передній привід</MenuItem>
+							<MenuItem value="3">Задній привід</MenuItem>
+						</Select>
+					</FormControl>
 					<TextField
 						margin="dense"
 						name="zero_to_full"
@@ -163,7 +165,7 @@ export default function EditCarForm({
 									<img
 										key={index}
 										src={URL.createObjectURL(photo)}
-										alt={`car-photo-${index}`}
+										alt={`new-car-photo-${index}`}
 										style={{ width: 100, marginRight: 10 }}
 									/>
 								))}

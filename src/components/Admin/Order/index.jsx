@@ -7,8 +7,10 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
+import FormControl from '@mui/material/FormControl'
 import axiosInstance from '../../../api/axiosInstance'
 import './index.scss'
+import { useSelector } from 'react-redux'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -31,6 +33,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function AdminOrder() {
 	const [orders, setOrders] = React.useState([])
+	const token = useSelector((state) => state.auth.token)
+	const orderStatus = {
+		1: 'Виконано',
+		2: 'Очікує підтвердження',
+		3: 'Скасовано',
+	}
 
 	React.useEffect(() => {
 		const fetchOrders = async () => {
@@ -44,6 +52,32 @@ export default function AdminOrder() {
 
 		fetchOrders()
 	}, [])
+
+	const handleStatusChange = async (order, e) => {
+		try {
+			const newStatus = e.target.value
+
+			const updatedOrderData = {
+				car_id: order.car_id,
+				phone_number: order.phone_number,
+				booking_date: order.booking_date,
+				lease_term: order.lease_term,
+				destination: order.destination,
+				order_status: newStatus,
+			}
+
+			await axiosInstance.post(`/admin/booking/${order.id}`, updatedOrderData, {
+				headers: { Authorization: `Bearer ${token}` },
+			})
+
+			const updatedOrders = orders.map((o) =>
+				o.id === order.id ? { ...o, order_status: newStatus } : o
+			)
+			setOrders(updatedOrders)
+		} catch (error) {
+			console.error(`Error updating order status for order ${order.id}:`, error)
+		}
+	}
 
 	return (
 		<TableContainer className="admin-cars" component={Paper}>
@@ -62,6 +96,7 @@ export default function AdminOrder() {
 						<StyledTableCell align="center">Користувач</StyledTableCell>
 						<StyledTableCell align="center">Номер телефону</StyledTableCell>
 						<StyledTableCell align="center">Статус</StyledTableCell>
+						<StyledTableCell align="center">Дії</StyledTableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -70,11 +105,12 @@ export default function AdminOrder() {
 							<StyledTableCell align="center" component="th" scope="row">
 								{order.id}
 							</StyledTableCell>
-							<StyledTableCell align="center">{order.car.name}</StyledTableCell>
+							<StyledTableCell align="center">
+								{order.car ? order.car.name : 'Невідомо'}
+							</StyledTableCell>
 							<StyledTableCell align="center">
 								{new Date(order.booking_date).toLocaleDateString('uk-UA')}
 							</StyledTableCell>
-
 							<StyledTableCell align="center">
 								{order.destination}
 							</StyledTableCell>
@@ -82,14 +118,33 @@ export default function AdminOrder() {
 								{order.lease_term} днів
 							</StyledTableCell>
 							<StyledTableCell align="center">
-								{order.user ? `${order.user.name}` : 'Невідомо'}
+								{order.user ? order.user.name : 'Невідомо'}
 							</StyledTableCell>
 							<StyledTableCell align="center">
 								{order.phone_number}
 							</StyledTableCell>
-
 							<StyledTableCell align="center">
-								{order.order_status}
+								{orderStatus[order.order_status] ||
+									order.order_status ||
+									'Невідомо'}
+							</StyledTableCell>
+							<StyledTableCell align="center">
+								<FormControl>
+									<select
+										id={`status-select-${order.id}`}
+										defaultValue={order.order_status}
+										onChange={(e) => handleStatusChange(order, e)}
+									>
+										<option disabled>Змінити статус</option>
+										{Object.entries(orderStatus).map(
+											([statusId, statusLabel]) => (
+												<option key={statusId} value={statusId}>
+													{statusLabel}
+												</option>
+											)
+										)}
+									</select>
+								</FormControl>
 							</StyledTableCell>
 						</StyledTableRow>
 					))}

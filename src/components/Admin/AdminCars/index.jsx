@@ -3,6 +3,7 @@ import axiosInstance from '../../../api/axiosInstance'
 import CarsTable from '../CarsTable'
 import AddCarForm from '../AddCarForm'
 import EditCarForm from '../EditCarForm'
+import { ToastContainer, toast } from 'react-toastify'
 import './index.scss'
 
 export default function AdminCars() {
@@ -73,11 +74,6 @@ export default function AdminCars() {
 	const handleAddCar = async (e) => {
 		e.preventDefault()
 
-		if (carPhotos.length < 4) {
-			alert('Додайте мінімум 4 фотографії')
-			return
-		}
-
 		const formData = new FormData()
 		Object.keys(newCar).forEach((key) => {
 			formData.append(key, newCar[key])
@@ -110,8 +106,18 @@ export default function AdminCars() {
 			})
 			setCarPhotos([])
 			fetchCars()
+			toast.success('Автомобіль додано!')
 		} catch (error) {
-			console.log(error)
+			let errorMessage = 'Щось пішло не так, спробуйте ще раз.'
+			if (error.response?.data?.errors) {
+				const firstErrorKey = Object.keys(error.response.data.errors)[0]
+				errorMessage = error.response.data.errors[firstErrorKey][0]
+			} else if (error.response?.data?.message) {
+				errorMessage = error.response.data.message
+			} else if (error.message) {
+				errorMessage = error.message
+			}
+			toast.error(errorMessage)
 		}
 	}
 
@@ -128,7 +134,7 @@ export default function AdminCars() {
 		})
 
 		try {
-			await axiosInstance.patch(`/admin/cars/${currentCar.id}`, formData, {
+			await axiosInstance.post(`/admin/cars/${currentCar.id}`, formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
@@ -136,8 +142,18 @@ export default function AdminCars() {
 
 			fetchCars()
 			setOpenEdit(false)
+			toast.success('Автомобіль змінено!')
 		} catch (error) {
-			console.error('Error editing car:', error)
+			let errorMessage = 'Щось пішло не так, спробуйте ще раз.'
+			if (error.response?.data?.errors) {
+				const firstErrorKey = Object.keys(error.response.data.errors)[0]
+				errorMessage = error.response.data.errors[firstErrorKey][0]
+			} else if (error.response?.data?.message) {
+				errorMessage = error.response.data.message
+			} else if (error.message) {
+				errorMessage = error.message
+			}
+			toast.error(errorMessage)
 		}
 	}
 
@@ -198,6 +214,17 @@ export default function AdminCars() {
 				handleDeleteCar={handleDeleteCar}
 				handleEditCar={handleClickOpenEdit}
 				carImage={carImage}
+			/>
+			<ToastContainer
+				position="bottom-center"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
 			/>
 		</div>
 	)

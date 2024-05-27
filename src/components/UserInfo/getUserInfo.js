@@ -17,7 +17,7 @@ function AuthUser() {
 
 			dispatch(setTokens(response.data))
 		} catch (error) {
-			console.log(error)
+			console.log('Error refreshing token:', error)
 		}
 	}
 
@@ -26,9 +26,10 @@ function AuthUser() {
 			let response = await axiosInstance.post('/user', null, {
 				headers: { Authorization: `Bearer ${token}` },
 			})
+
 			dispatch(setUserInfo(response.data.data))
 		} catch (error) {
-			console.log(error)
+			console.log('Error fetching user info:', error)
 		}
 	}
 
@@ -36,13 +37,15 @@ function AuthUser() {
 		if (!token && refreshToken) {
 			refresh()
 		}
-	}, [])
+	}, [token, refreshToken])
 
 	useEffect(() => {
 		if (token) {
 			fetchUser()
 		}
 	}, [token])
+
+	return null
 }
 
 export default AuthUser

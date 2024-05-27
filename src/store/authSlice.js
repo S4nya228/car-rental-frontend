@@ -30,9 +30,14 @@ const authSlice = createSlice({
 		setUserInfo: (state, action) => {
 			state.userInfo = action.payload
 		},
+		addOrder: (state, action) => {
+			if (state.userInfo) {
+				state.userInfo.orders = [...state.userInfo.orders, action.payload]
+			}
+		},
 	},
 })
 
-export const { setTokens, clearTokens, updateToken, setUserInfo } =
+export const { setTokens, clearTokens, updateToken, setUserInfo, addOrder } =
 	authSlice.actions
 export default authSlice.reducer

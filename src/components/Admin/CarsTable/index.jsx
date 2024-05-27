@@ -17,7 +17,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 		color: theme.palette.common.white,
 	},
 	[`&.${tableCellClasses.body}`]: {
-		fontSize: 14,
+		fontSize: 16,
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
 	},
 }))
 
@@ -71,7 +74,9 @@ export default function CarsTable({
 									component="th"
 									scope="row"
 								>
-									{car.name}
+									{car.name.length > 15
+										? `${car.name.slice(0, 15)}...`
+										: car.name}
 								</StyledTableCell>
 								<StyledTableCell className="cars-table__row">
 									{car.car_class.label}
