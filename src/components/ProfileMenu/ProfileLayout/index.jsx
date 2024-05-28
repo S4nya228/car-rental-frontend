@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './index.scss'
 import { BoxArrowRight } from 'react-bootstrap-icons'
 import { useSelector, useDispatch } from 'react-redux'
@@ -14,12 +14,19 @@ function ProfileLayout() {
 	const token = useSelector((state) => state.auth.token)
 
 	const [editMode, setEditMode] = useState(false)
-	const [name, setName] = useState(userInfo?.name || '')
-	const [email, setEmail] = useState(userInfo?.email || '')
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
 
 	const handleEditClick = () => {
 		setEditMode(true)
 	}
+
+	useEffect(() => {
+		if (userInfo) {
+			setName(userInfo.name)
+			setEmail(userInfo.email)
+		}
+	}, [userInfo])
 
 	const handleSaveClick = async () => {
 		try {
@@ -70,7 +77,7 @@ function ProfileLayout() {
 								type="text"
 								placeholder="Ім'я"
 								className="profile-layout__item-name"
-								value={userInfo ? userInfo.name : ''}
+								value={name}
 								onChange={(e) => setName(e.target.value)}
 								readOnly={!editMode}
 								required
@@ -82,7 +89,7 @@ function ProfileLayout() {
 								type="email"
 								placeholder="Пошта"
 								className="profile-layout__item-email"
-								value={userInfo ? userInfo.email : ''}
+								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								readOnly={!editMode}
 								required

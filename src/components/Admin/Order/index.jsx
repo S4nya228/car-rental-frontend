@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl'
 import axiosInstance from '../../../api/axiosInstance'
 import './index.scss'
 import { useSelector } from 'react-redux'
+import { ToastContainer, toast } from 'react-toastify'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -74,6 +75,7 @@ export default function AdminOrder() {
 				o.id === order.id ? { ...o, order_status: newStatus } : o
 			)
 			setOrders(updatedOrders)
+			toast.success('Статус оновлено')
 		} catch (error) {
 			console.error(`Error updating order status for order ${order.id}:`, error)
 		}
@@ -150,6 +152,17 @@ export default function AdminOrder() {
 					))}
 				</TableBody>
 			</Table>
+			<ToastContainer
+				position="bottom-center"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 		</TableContainer>
 	)
 }

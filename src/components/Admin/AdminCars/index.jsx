@@ -161,6 +161,7 @@ export default function AdminCars() {
 		try {
 			await axiosInstance.delete(`/admin/cars/${carId}`)
 			setCars(cars.filter((car) => car.id !== carId))
+			toast.success('Автомобіль видалено!')
 		} catch (error) {
 			console.error('Error deleting car:', error)
 		}

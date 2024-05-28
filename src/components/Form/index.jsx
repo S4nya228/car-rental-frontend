@@ -71,6 +71,7 @@ function Form({ carId, selectedCar, clearSelectedCar }) {
 							type="text"
 							className="form__input"
 							placeholder="+38 (099) 123-45-78"
+							pattern="^\+38[0-9]{10}$"
 							value={phoneNumber}
 							onChange={(e) => setPhoneNumber(e.target.value)}
 							required

@@ -34,7 +34,7 @@ function CarsCategories({ onFilterChange }) {
 					</div>
 					<div className="cars-categories__list">
 						{Object.keys(classNamesMap).map((key) => (
-							<a
+							<div
 								key={key}
 								className={`cars-categories__list-item ${
 									selectedClass === parseInt(key) ? 'selected' : ''
@@ -53,7 +53,7 @@ function CarsCategories({ onFilterChange }) {
 								>
 									{classNamesMap[key]}
 								</span>
-							</a>
+							</div>
 						))}
 					</div>
 				</div>
